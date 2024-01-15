@@ -2,10 +2,12 @@ export const ImageCard = ({
   src,
   id,
   width = "100%",
-  height,
+  height = "auto",
+  borderRadius = 0,
 }: {
   height?: string | number;
   src: string;
+  borderRadius?: number;
   id?: string;
   width?: string | number;
 }) => {
@@ -19,7 +21,8 @@ export const ImageCard = ({
         objectPosition: "center",
         borderTopLeftRadius: "inherit",
         borderTopRightRadius: "inherit",
-        height: height !== null && height !== undefined ? height : "auto",
+        height,
+        borderRadius,
       }}
       id={id}
     />

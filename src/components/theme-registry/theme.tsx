@@ -3,7 +3,7 @@ import { createTheme } from "@mui/material/styles";
 import { PRIMARYCOLOR } from "../config";
 
 const be_Vietnam_Pro = Be_Vietnam_Pro({
-  weight: ["300", "400", "500", "700", "900"],
+  weight: ["100","300", "400", "500", "700", "900"],
   subsets: ["latin"],
   display: "swap",
 });

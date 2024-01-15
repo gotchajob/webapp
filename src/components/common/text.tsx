@@ -4,8 +4,8 @@ import { PRIMARYCOLOR } from "../config";
 export const maxLineStyle = (maxLine: number) => {
   return {
     display: "-webkit-box",
-    "-webkit-line-clamp": 2,
-    "-webkit-box-orient": "vertical",
+    WebkitLineClamp: 2,
+    WebkitBoxOrient: "vertical",
     overflow: "hidden",
     textverflow: "ellipsis",
   };

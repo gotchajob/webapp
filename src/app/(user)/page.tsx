@@ -8,6 +8,7 @@ import { Suspense } from "react";
 import { ServiceCard } from "@/components/card/service-card/service-card";
 import { ServiceList } from "./_components/service-list";
 import { BlogList } from "./_components/blog-list";
+import { Feedback } from "./_components/feedback";
 export default async function Page() {
   return (
     <>
@@ -24,12 +25,13 @@ export default async function Page() {
       <FlexCenter>
         <PartnerCarousel />
       </FlexCenter>
-      <FlexCenter mb={10}>
+      <FlexCenter>
         <ServiceList />
       </FlexCenter>
       <FlexCenter>
         <BlogList />
       </FlexCenter>
+      <Feedback/>
     </>
   );
 }

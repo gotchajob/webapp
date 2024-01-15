@@ -28,7 +28,7 @@ export const Header = () => {
         </FlexBox>
         <FlexBox>
           <OutlinedButton sx={{ mr: 1.5 }}>Đăng kí</OutlinedButton>
-          <ContainedButton>Đăng nhập</ContainedButton>
+          <ContainedButton component={Link} href="/login">Đăng nhập</ContainedButton>
         </FlexBox>
       </FlexBetween>
     </Container>
