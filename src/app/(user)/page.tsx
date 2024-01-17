@@ -9,6 +9,7 @@ import { ServiceCard } from "@/components/card/service-card/service-card";
 import { ServiceList } from "./_components/service-list";
 import { BlogList } from "./_components/blog-list";
 import { Feedback } from "./_components/feedback";
+import { PriceList } from "./_components/price-list";
 export default async function Page() {
   return (
     <>
@@ -31,7 +32,13 @@ export default async function Page() {
       <FlexCenter>
         <BlogList />
       </FlexCenter>
-      <Feedback/>
+      <Feedback />
+      <FlexCenter>
+        <PriceList />
+      </FlexCenter>
+      <FlexCenter>
+        <BlogList />
+      </FlexCenter>
     </>
   );
 }

@@ -24,7 +24,7 @@ export const Feedback = () => {
     }
   }, [clientWidth]);
   return (
-    <Box position={"relative"} height={feedbackHeight} pt={25}>
+    <Box position={"relative"} height={feedbackHeight} mt={25}>
       <Box position={"absolute"} width={"100%"} zIndex={0}>
         <ImageCard
           src="/assets/images/feedback.png"
@@ -85,6 +85,7 @@ export const Feedback = () => {
             color={"white"}
             fontWeight={"300"}
             width={800}
+            fontStyle={"italic"}
           >
             Dịch vụ thuê mentor để hỗ trợ làm đồ án bên GotchaJob thật sự rất
             hữu ích và tiết kiệm thời gian cũng như công sức của mình. Giá cả
