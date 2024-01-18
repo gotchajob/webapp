@@ -5,7 +5,8 @@ import { FlexBox, FlexCenter } from "@/components/common/flex-box";
 import { ImageCard } from "@/components/common/image-card";
 import { Text } from "@/components/common/text";
 import Box, { BoxProps } from "@mui/material/Box";
-import { ReactNode } from "react";
+import { ButtonProps } from "@mui/material/Button";
+import { MouseEventHandler, ReactNode } from "react";
 
 export const DescriptionIcon = ({ children, ...props }: BoxProps) => {
   return (
@@ -52,12 +53,12 @@ export const Title = ({ children }: { children: ReactNode }) => {
     </FlexCenter>
   );
 };
-export const ButtonClick = ({ children }: { children: ReactNode }) => {
+export const ButtonClick = ({ children, ...props }: ButtonProps) => {
   return (
     <FlexCenter position={"absolute"} zIndex={2} width={376} bottom={-20}>
       {/* <Text px={2} py={0.5} color={"#04273B"} bgcolor={"#b4d8ed"} borderRadius={4} fontWeight={700}>
         </Text> */}
-      <ContainedButton>{children}</ContainedButton>
+      <ContainedButton {...props}>{children}</ContainedButton>
     </FlexCenter>
   );
 };
@@ -66,11 +67,13 @@ export const PriceCard = ({
   desVisible = true,
   title,
   description,
+  onClick = () => {},
 }: {
   description?: string;
   title: string;
   children: ReactNode;
   desVisible?: boolean;
+  onClick?: MouseEventHandler;
 }) => {
   return (
     <Box position={"relative"} marginX={1.5}>
@@ -97,7 +100,7 @@ export const PriceCard = ({
           </Text>
         </FlexCenter>
       </FlexCenter>
-      <ButtonClick>Mua ngay</ButtonClick>
+      <ButtonClick onClick={onClick}>Mua ngay</ButtonClick>
     </Box>
   );
 };
