@@ -1,3 +1,4 @@
+import { Footer } from "@/components/footer/footer";
 import { Header } from "@/components/header/header";
 import Box from "@mui/material/Box";
 
@@ -10,6 +11,7 @@ export default async function Layout({
     <>
       <Header />
       <Box mt={"96px"}>{children}</Box>
+      <Footer/>
     </>
   );
 }

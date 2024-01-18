@@ -10,6 +10,8 @@ import { ServiceList } from "./_components/service-list";
 import { BlogList } from "./_components/blog-list";
 import { Feedback } from "./_components/feedback";
 import { PriceList } from "./_components/price-list";
+import { MentorList } from "./_components/mentor-list";
+import { Contact } from "./_components/contact";
 export default async function Page() {
   return (
     <>
@@ -37,7 +39,10 @@ export default async function Page() {
         <PriceList />
       </FlexCenter>
       <FlexCenter>
-        <BlogList />
+        <MentorList />
+      </FlexCenter>
+      <FlexCenter>
+        <Contact />
       </FlexCenter>
     </>
   );

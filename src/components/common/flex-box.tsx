@@ -4,7 +4,6 @@ export const FlexBox = ({ children, ...props }: BoxProps) => {
   return (
     <Box
       display="flex"
-      justifyContent="space-between"
       alignItems="center"
       {...props}
     >

@@ -1,3 +1,4 @@
+import Image from "next/image";
 export const ImageCard = ({
   src,
   id,
@@ -12,9 +13,11 @@ export const ImageCard = ({
   width?: string | number;
 }) => {
   return (
-    <img
+    <Image
       src={src}
       alt="none"
+      width={1920}
+      height={1920}
       style={{
         width,
         objectFit: "cover",
@@ -22,7 +25,6 @@ export const ImageCard = ({
         borderTopLeftRadius: "inherit",
         borderTopRightRadius: "inherit",
         height,
-        borderRadius,
       }}
       id={id}
     />

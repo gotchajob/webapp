@@ -5,7 +5,7 @@ import { SubTitle } from "@/components/common/text";
 import Box from "@mui/material/Box";
 import React from "react";
 import AliceCarousel from "react-alice-carousel";
-import "react-alice-carousel/lib/alice-carousel.css";
+import "../../../scss/carousel.scss";
 
 export const PartnerCarousel = () => {
   const listPartner = [
@@ -60,6 +60,10 @@ export const PartnerCarousel = () => {
           paddingLeft: "30px",
           paddingRight: "30px",
           height: "60px !important",
+          opacity: 0.6,
+          ":hover": {
+            opacity: 1,
+          },
         }}
       >
         <ImageCard src={partner.logo} width={80} />

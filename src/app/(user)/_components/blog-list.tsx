@@ -40,7 +40,7 @@ export const BlogList = () => {
       <MainTitle p={10} pt={25} id={"blogDiv"}>
         Blog
       </MainTitle>
-      <Grid container sx={{ width: "1230px" }}>
+      <Grid container sx={{ width: "1232px" }}>
         {blogList.map((blog) => (
           <Grid item xs={3} key={blog.title}>
             <BlogCard props={blog} />

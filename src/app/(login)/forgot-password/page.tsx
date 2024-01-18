@@ -1,7 +1,7 @@
 import { ContainedButton, OutlinedButton } from "@/components/common/button";
 import { FlexBetween, FlexBox, FlexCenter } from "@/components/common/flex-box";
 import { ImageCard } from "@/components/common/image-card";
-import { Input } from "@/components/common/input";
+import { Input } from "@/components/common/input/input";
 import { Text } from "@/components/common/text";
 import { PRIMARYCOLOR } from "@/components/config";
 import Box from "@mui/material/Box";

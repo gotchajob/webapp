@@ -1,4 +1,4 @@
-input {
+.input {
   background-color: #f1f8fc;
   border: 0px;
   padding: 8px 20px 7px;
@@ -6,20 +6,21 @@ input {
   font-size: 14px;
   font-weight: 600;
   border-radius: 5px;
+  resize: none;
 }
-input::placeholder {
+.input::placeholder {
   color: #b4d8ed;
 }
-input:focus {
-  border: 2px solid #0e82c4 !important;
-  padding: 6px 18px 5px;
+.input:focus {
+  border: 2px solid #0e82c4 ;
+  padding: 6px 18px 5.5px;
   outline: none;
 }
 
 
 /* CSS để ẩn spinner */
-input::-webkit-inner-spin-button,
-input::-webkit-outer-spin-button {
+.input::-webkit-inner-spin-button,
+.input::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }

@@ -4,7 +4,6 @@ import { StyledCard } from "@/components/common/card";
 import { ImageCard } from "@/components/common/image-card";
 import { Text, maxLineStyle } from "@/components/common/text";
 import { PRIMARYCOLOR } from "@/components/config";
-import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import EastIcon from "@mui/icons-material/East";
 import "../blog-card/styled.scss";
@@ -29,9 +28,7 @@ export const BlogCard = ({ props }: { props: BlogCardProps }) => {
       }}
     >
       {/* 280 */}
-      <Box flex={1}>
-        <ImageCard src={props.image} height={"100%"} />
-      </Box>
+      <ImageCard src={props.image} height={"100%"} />
       <Stack spacing={1} paddingX={3} paddingY={2.5}>
         <Text fontSize={12}>
           <span

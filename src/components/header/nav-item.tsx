@@ -10,7 +10,7 @@ import { PRIMARYCOLOR } from "../config";
 export const NavigationItem = () => {
   const navItemList = [
     { name: "Dịch vụ", targetId: "serviceDiv", icon: ArrowDropDownIcon },
-    { name: "Đội ngũ", targetId: "teamDiv", icon: ArrowDropDownIcon },
+    { name: "Đội ngũ", targetId: "mentorDiv", icon: ArrowDropDownIcon },
     { name: "Blog", targetId: "blogDiv" },
   ];
   const handleClick = (targetId: string) => {

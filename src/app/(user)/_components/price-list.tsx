@@ -9,7 +9,7 @@ import Grid from "@mui/material/Grid";
 export const PriceList = () => {
   return (
     <>
-      <MainTitle p={10} pt={25}>
+      <MainTitle p={10} pt={30}>
         Giá cả
       </MainTitle>
       <Grid container sx={{ width: "760px" }}>
