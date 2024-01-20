@@ -21,8 +21,8 @@ export const Banner = () => {
   }, [clientWidth]);
   return (
     <Box position={"relative"} height={bannerHeight}>
-      <Box position={"absolute"} width={"100%"} zIndex={0}>
-        <ImageCard src="/assets/images/banner.png" id={"imageBannerId"} />
+      <Box position={"absolute"} width={"100%"} zIndex={0} >
+        <ImageCard src="/assets/images/banner.png" id={"imageBannerId"}/>
       </Box>
       <FlexCenter
         position="absolute"

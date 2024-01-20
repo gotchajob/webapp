@@ -4,7 +4,6 @@ export const ImageCard = ({
   id,
   width = "100%",
   height = "auto",
-  borderRadius = 0,
 }: {
   height?: string | number;
   src: string;
@@ -17,7 +16,7 @@ export const ImageCard = ({
       src={src}
       alt="none"
       width={1920}
-      height={1920}
+      height={1080}
       style={{
         width,
         objectFit: "cover",

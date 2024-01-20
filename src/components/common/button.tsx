@@ -8,19 +8,19 @@ export const ContainedButton = ({ children, ...props }: ButtonProps) => {
       variant="contained"
       color="primary"
       {...props}
-      style={{
+      sx={{
         backgroundColor: PRIMARYCOLOR,
         textTransform: "none",
-        height: 40,
+        height: "40px",
+        padding: "2px",
+        paddingLeft: "25px",
+        paddingRight: "25px",
         borderRadius: 30,
-        width: "fit-content",
-        padding: 3,
         boxShadow: "none",
-        paddingLeft: 25,
-        paddingRight: 25,
         fontWeight: 500,
         fontSize: "1.1rem",
         letterSpacing: 1,
+        ...props.sx
       }}
     >
       {children}
@@ -34,19 +34,20 @@ export const OutlinedButton = ({ children, ...props }: ButtonProps) => {
       variant="outlined"
       color="primary"
       {...props}
-      style={{
+      sx={{
         border: `2px solid ${PRIMARYCOLOR} !important`,
         textTransform: "none",
-        height: 40,
         borderRadius: 30,
-        padding: 2,
+        height: "40px",
+        padding: "2px",
+        paddingLeft: "25px",
+        paddingRight: "25px",
         boxShadow: "none",
-        paddingLeft: 25,
-        paddingRight: 25,
         fontWeight: 500,
         width: "fit-content",
         fontSize: "1.1rem",
         letterSpacing: 1,
+        ...props.sx
       }}
     >
       {children}
@@ -58,18 +59,18 @@ export const OutlinedIconButton = ({ children, ...props }: ButtonProps) => {
     <IconButton
       variant="outlined"
       color="primary"
+      size="small"
       {...props}
-      style={{
+      sx={{
         border: `2px solid ${PRIMARYCOLOR} !important`,
         textTransform: "none",
-        height: 42,
-        width: 42,
         borderRadius: 30,
-        padding: 4,
+        padding: 1,
         boxShadow: "none",
         fontWeight: 500,
         fontSize: "1.1rem",
         letterSpacing: 1,
+        ...props.sx
       }}
     >
       {children}
