@@ -1,6 +1,5 @@
 "use client";
 
-import Box from "@mui/material/Box";
 import Dialog from "@mui/material/Dialog";
 import Grid from "@mui/material/Grid";
 import { Dispatch, SetStateAction } from "react";
@@ -20,6 +19,13 @@ export const ServicePopup = ({
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
 }) => {
+  const handleClick = () => {
+    if (document !== null) {
+      //@ts-ignore
+      document.getElementById("priceDiv").scrollIntoView({ behavior: "smooth" });
+      setIsOpen(false)
+    }
+  };
   return (
     <Dialog
       open={isOpen}
@@ -143,7 +149,7 @@ export const ServicePopup = ({
                   1 buổi phòng vấn
                 </Text>
               </FlexCenter>
-              <ContainedButton>Mua ngay</ContainedButton>
+              <ContainedButton onClick={handleClick}>Mua ngay</ContainedButton>
             </FlexBetween>
           </Grid>
         </Grid>

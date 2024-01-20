@@ -13,3 +13,19 @@ export const StyledCard = ({ children, ...props }: BoxProps) => {
     </Box>
   );
 };
+export const ContainedCard = ({ children, ...props }: BoxProps) => {
+  return (
+    <Box
+      sx={{
+        bgcolor: "#e3f1f9",
+        borderRadius: 2,
+        px: 1.5,
+        width: "fit-content",
+        py: 1,
+      }}
+      {...props}
+    >
+      {children}
+    </Box>
+  );
+};

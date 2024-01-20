@@ -13,7 +13,11 @@ export const Input = ({
     <>
       {multiline ? (
         // @ts-ignore
-        <textarea {...props} className="input" />
+        <textarea
+          {...props}
+          className="input"
+ 
+        />
       ) : (
         // @ts-ignore
         <input {...props} className="input" />

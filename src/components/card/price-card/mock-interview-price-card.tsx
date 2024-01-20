@@ -4,7 +4,7 @@ import { FlexBox } from "@/components/common/flex-box";
 import { PriceCard } from "./price-card";
 import { Text } from "@/components/common/text";
 import { useState } from "react";
-import { ServicePopup } from "@/components/popup/service-popup";
+import { PricePopup } from "@/components/popup/price-popup";
 export const MockInterviewPriceCard = () => {
   const [isOpen, setIsOpen] = useState(false);
   return (
@@ -25,7 +25,7 @@ export const MockInterviewPriceCard = () => {
           </Text>
         </FlexBox>
       </PriceCard>
-      <ServicePopup isOpen={isOpen} setIsOpen={setIsOpen} />
+      <PricePopup isOpen={isOpen} setIsOpen={setIsOpen} />
     </>
   );
 };
