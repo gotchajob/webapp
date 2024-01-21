@@ -11,7 +11,7 @@ import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 
 export const Banner = () => {
   const [bannerHeight, setBannerHeight] = useState(753.36);
-  let clientWidth = useWindowSize();
+  const clientWidth = useWindowSize();
   useEffect(() => {
     if (document !== null) {
       const bannerHeight =

@@ -1,9 +1,21 @@
+"use client";
 import { BlogCard, BlogCardProps } from "@/components/card/blog-card/blog-card";
+import { FlexBox } from "@/components/common/flex-box";
 import { MainTitle } from "@/components/common/text";
-
-import Grid from "@mui/material/Grid";
+import useWindowSize from "@/hook/use-window-size";
+import { useEffect, useState } from "react";
 
 export const BlogList = () => {
+  const clientWidth = useWindowSize();
+  const [numberOfBlog, setNumberOfBlog] = useState(4);
+  useEffect(() => {
+    if (clientWidth >= 1232) {
+      setNumberOfBlog(4);
+    } 
+    else {
+      setNumberOfBlog(Math.floor(clientWidth / 308))
+    }
+  }, [clientWidth]);
   const blogList: BlogCardProps[] = [
     {
       author: "Tuấn Trần",
@@ -23,30 +35,30 @@ export const BlogList = () => {
     {
       author: "Tuấn Trần",
       image: "/assets/images/blog-3.png",
-      description: "Work from home hay còn được gọi là làm việc tại nhà, làm việc online, hiện nay...",
+      description:
+        "Work from home hay còn được gọi là làm việc tại nhà, làm việc online, hiện nay...",
       time: "2023, 29 tháng 2",
       title: "Cách để tối đa công suất khi làm việc ở nhà",
     },
     {
       author: "Tuấn Trần",
       image: "/assets/images/blog-4.png",
-      description: "Bạn muốn xin việc và được trả lời ngay lập tức, bạn muốn một CV mà ai nhìn...",
+      description:
+        "Bạn muốn xin việc và được trả lời ngay lập tức, bạn muốn một CV mà ai nhìn...",
       time: "2023, 30 tháng 4",
       title: "Những sơ yếu lí lịch chuẩn cập nhật mới nhất 2023",
     },
   ];
   return (
     <>
-      <MainTitle p={10} pt={25} id={"blogDiv"}>
+      <MainTitle py={10} pt={25} id={"blogDiv"}>
         Blog
       </MainTitle>
-      <Grid container sx={{ width: "1232px" }}>
-        {blogList.map((blog) => (
-          <Grid item xs={3} key={blog.title}>
-            <BlogCard props={blog} />
-          </Grid>
+      <FlexBox>
+        {blogList.slice(0, numberOfBlog).map((blog) => (
+          <BlogCard props={blog} key={blog.title} />
         ))}
-      </Grid>
+      </FlexBox>
     </>
   );
 };

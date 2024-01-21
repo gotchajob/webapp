@@ -5,7 +5,7 @@ import { PriceCard } from "./price-card";
 import { Text } from "@/components/common/text";
 export const PartnerTrainingPriceCard = () => {
   return (
-    <PriceCard title="Trải nghiệm doanh nghiệp" description="1 dự án">
+    <PriceCard title="Trải nghiệm doanh nghiệp" description="1 dự án" disable={true}>
       <FlexBox alignItems={"baseline"}>
         <Text fontSize={25} color={"white"} fontWeight={700}>
           1.200

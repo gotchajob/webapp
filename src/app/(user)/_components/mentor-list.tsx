@@ -1,9 +1,7 @@
 "use client";
-import { FlexCenter } from "@/components/common/flex-box";
-import { ImageCard } from "@/components/common/image-card";
 import { MainTitle } from "@/components/common/text";
 import Box from "@mui/material/Box";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import AliceCarousel from "react-alice-carousel";
 import "../../../scss/carousel.scss";
 import {
@@ -11,8 +9,18 @@ import {
   MentorCardProps,
   MentorNextButton,
 } from "@/components/card/mentor-card/mentor-card";
+import useWindowSize from "@/hook/use-window-size";
 
 export const MentorList = () => {
+  const clientWidth = useWindowSize();
+  const [mentorNumber, setMentorNumber] = useState(3);
+  useEffect(() => {
+    if (clientWidth > 1024) {
+      setMentorNumber(3);
+    } else {
+      setMentorNumber(Math.floor((clientWidth - 100) / 308));
+    }
+  }, [clientWidth]);
   const listMentor: MentorCardProps[] = [
     {
       image: "/assets/images/mentor-1.png",
@@ -44,28 +52,32 @@ export const MentorList = () => {
     },
   ];
   const responsive = {
-    0: {
+    308: {
       items: 1,
     },
-    568: {
+    616: {
       items: 2,
     },
-    1024: {
+    924: {
       items: 3,
     },
   };
 
   const items = listMentor.map((mentor) => {
-    return <MentorCard props={mentor} key={mentor.title}/>;
+    return <MentorCard props={mentor} key={mentor.title} />;
   });
   return (
     <>
-      <MainTitle p={10} pt={30} id={"mentorDiv"}>
+      <MainTitle py={10} pt={30} id={"mentorDiv"}>
         Đội ngũ chuyên môn
       </MainTitle>
-      <Box width={1024} paddingX={"50px"} position={"relative"}>
+      <Box
+        width={mentorNumber * 308 + 100}
+        paddingX={"50px"}
+        position={"relative"}
+      >
         <AliceCarousel
-          innerWidth={1024}
+          innerWidth={mentorNumber * 308}
           activeIndex={0}
           animationDuration={1000}
           preservePosition

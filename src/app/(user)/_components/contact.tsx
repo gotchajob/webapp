@@ -11,17 +11,27 @@ import Stack from "@mui/material/Stack";
 export const Contact = () => {
   return (
     <>
-      <MainTitle p={10} pt={30}>
+      <MainTitle py={10} pt={30}>
         Liên hệ chúng tôi
       </MainTitle>
-      <Grid container sx={{ width: "1200px" }}>
+      <Grid container maxWidth={1200}>
         <Grid item xs={12} mb={15}>
           <FlexCenter>
             <GoogleMap />
           </FlexCenter>
         </Grid>
-        <Grid item xs={6}>
-          <Stack spacing={4}>
+        <Grid
+          item
+          xs={12}
+          sm={6}
+          sx={{
+            marginBottom: {
+              xs: 15,
+              sm: "0px !important",
+            },
+          }}
+        >
+          <Stack spacing={4} maxWidth={624} margin={"auto"}>
             <InformationLine
               image="/assets/icon/location.png"
               title="Địa chỉ:"
@@ -39,8 +49,10 @@ export const Contact = () => {
             />
           </Stack>
         </Grid>
-        <Grid item xs={6}>
-          <ContactForm />
+        <Grid item xs={12} sm={6}>
+          <FlexCenter maxWidth={624} margin={"auto"}>
+            <ContactForm />
+          </FlexCenter>
         </Grid>
       </Grid>
     </>

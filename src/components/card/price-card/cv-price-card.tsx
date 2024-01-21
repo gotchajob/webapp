@@ -5,7 +5,7 @@ import { PriceCard } from "./price-card";
 import { Text } from "@/components/common/text";
 export const CVPriceCard = () => {
   return (
-    <PriceCard title="CV" description="1 CV">
+    <PriceCard title="CV" description="1 CV" disable={true}>
       <FlexBox alignItems={"baseline"}>
         <Text fontSize={25} color={"white"} fontWeight={700}>
           200

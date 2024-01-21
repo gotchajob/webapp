@@ -23,6 +23,7 @@ export const BlogCard = ({ props }: { props: BlogCardProps }) => {
         height: "405px",
         margin: "15px",
         cursor: "pointer",
+        width: "278px",
         display: "flex",
         flexDirection: "column",
       }}

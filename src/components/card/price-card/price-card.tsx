@@ -56,8 +56,6 @@ export const Title = ({ children }: { children: ReactNode }) => {
 export const ButtonClick = ({ children, ...props }: ButtonProps) => {
   return (
     <FlexCenter position={"absolute"} zIndex={2} width={376} bottom={-20}>
-      {/* <Text px={2} py={0.5} color={"#04273B"} bgcolor={"#b4d8ed"} borderRadius={4} fontWeight={700}>
-        </Text> */}
       <ContainedButton {...props}>{children}</ContainedButton>
     </FlexCenter>
   );
@@ -67,16 +65,18 @@ export const PriceCard = ({
   desVisible = true,
   title,
   description,
+  disable = false,
   onClick = () => {},
 }: {
   description?: string;
   title: string;
+  disable?: boolean;
   children: ReactNode;
   desVisible?: boolean;
   onClick?: MouseEventHandler;
 }) => {
   return (
-    <Box position={"relative"} marginX={1.5}>
+    <Box position={"relative"} marginX={1.5} width={356}>
       <DescriptionIcon visibility={desVisible ? "visible" : "hidden"}>
         {description}
       </DescriptionIcon>
@@ -100,7 +100,7 @@ export const PriceCard = ({
           </Text>
         </FlexCenter>
       </FlexCenter>
-      <ButtonClick onClick={onClick}>Mua ngay</ButtonClick>
+      {disable ? <></> : <ButtonClick onClick={onClick}>Mua ngay</ButtonClick>}
     </Box>
   );
 };

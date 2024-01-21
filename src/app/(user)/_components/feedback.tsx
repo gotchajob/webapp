@@ -84,7 +84,7 @@ export const Feedback = () => {
             fontSize={13}
             color={"white"}
             fontWeight={"300"}
-            width={800}
+            maxWidth={800}
             fontStyle={"italic"}
           >
             Dịch vụ thuê mentor để hỗ trợ làm đồ án bên GotchaJob thật sự rất

@@ -66,7 +66,7 @@ export const ContactForm = () => {
             helperText={(touched.email && errors.email) as string}
           />
         </Grid>
-        <Grid item xs={10}>
+        <Grid item xs={9.5}>
           <Input
             multiline
             rows={4}
@@ -80,7 +80,7 @@ export const ContactForm = () => {
             helperText={(touched.description && errors.description) as string}
           />
         </Grid>
-        <Grid item xs={2}>
+        <Grid item xs={2.5}>
           <FlexBetween alignItems={"flex-end"} height={"90%"}>
             <div></div>
             <ContainedButton type="submit">Gửi</ContainedButton>

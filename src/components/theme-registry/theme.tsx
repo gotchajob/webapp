@@ -3,7 +3,7 @@ import { createTheme } from "@mui/material/styles";
 import { PRIMARYCOLOR } from "../config";
 
 const be_Vietnam_Pro = Be_Vietnam_Pro({
-  weight: ["100", "200","300", "400", "500", "700", "900"],
+  weight: ["100", "200", "300", "400", "500", "700", "900"],
   subsets: ["latin"],
   display: "swap",
 });
@@ -12,9 +12,15 @@ const theme = createTheme({
   breakpoints: {
     values: {
       xs: 0,
-      sm: 600,
-      md: 960,
-      lg: 1100,
+      sm: 840,
+      md: 1100,
+      lg: 1232,
+      //@ts-ignore
+      800: 800,
+      840: 840,
+      1232: 1232,
+      1309: 1309,
+      1310: 1310,
       xl: 1920,
     },
   },

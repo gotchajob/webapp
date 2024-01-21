@@ -33,7 +33,9 @@ export default function RootLayout({
           href="/assets/images/favicon.ico"
         />
       </head>
-      <body>
+      <body style={{
+        overflowX: "hidden"
+      }}>
         <ThemeRegistry>
           <SnackbarProvider>{children}</SnackbarProvider>
         </ThemeRegistry>

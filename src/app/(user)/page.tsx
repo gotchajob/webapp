@@ -12,18 +12,14 @@ import { Feedback } from "./_components/feedback";
 import { PriceList } from "./_components/price-list";
 import { MentorList } from "./_components/mentor-list";
 import { Contact } from "./_components/contact";
+import { Media } from "./_components/media";
 export default async function Page() {
   return (
     <>
       <Banner />
-      <MainTitle p={15}>Về chúng tôi</MainTitle>
+      <MainTitle py={15}>Về chúng tôi</MainTitle>
       <FlexCenter>
-        <CardMedia
-          component={"video"}
-          controls={true}
-          sx={{ width: 800 }}
-          src="/assets/videos/demo.mp4"
-        />
+        <Media/>
       </FlexCenter>
       <FlexCenter>
         <PartnerCarousel />
