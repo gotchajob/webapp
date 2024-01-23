@@ -3,9 +3,8 @@ import { PRIMARYCOLOR } from "../config";
 
 export const maxLineStyle = (maxLine: number) => {
   return {
-    display: "-webkit-box",
-    "-webkit-line-clamp": maxLine,
-    "-webkit-box-orient": "vertical",
+    maxHeight: `${1.2 * maxLine}em`, // Chiều cao tối đa của 2 dòng với line-height 1.5
+    lineHeight: `1.2`,
     overflow: "hidden",
     textverflow: "ellipsis",
   };

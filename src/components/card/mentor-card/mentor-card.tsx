@@ -38,7 +38,7 @@ export const MentorCard = ({ props }: { props: MentorCardProps }) => {
         </Text>
         <Text fontSize={10}>{props.subtitle}</Text>
         <Box className="mentor-card-navigation">
-          <Text style={maxLineStyle(2)} fontSize={10}>
+          <Text style={maxLineStyle(10)} fontSize={10}>
             {props.description}
           </Text>
         </Box>

@@ -1,7 +1,7 @@
 "use client";
 
 import { ContainedButton } from "@/components/common/button";
-import { FlexBox, FlexCenter } from "@/components/common/flex-box";
+import { FlexCenter } from "@/components/common/flex-box";
 import { ImageCard } from "@/components/common/image-card";
 import { Text } from "@/components/common/text";
 import Box, { BoxProps } from "@mui/material/Box";
@@ -39,7 +39,7 @@ export const DescriptionIcon = ({ children, ...props }: BoxProps) => {
 };
 export const Title = ({ children }: { children: ReactNode }) => {
   return (
-    <FlexCenter position={"absolute"} zIndex={2} width={376} top={-16}>
+    <FlexCenter position={"absolute"} zIndex={2} width={356} top={-16}>
       <Text
         px={2}
         py={0.5}
@@ -55,7 +55,7 @@ export const Title = ({ children }: { children: ReactNode }) => {
 };
 export const ButtonClick = ({ children, ...props }: ButtonProps) => {
   return (
-    <FlexCenter position={"absolute"} zIndex={2} width={376} bottom={-20}>
+    <FlexCenter position={"absolute"} zIndex={2} width={356} bottom={-20}>
       <ContainedButton {...props}>{children}</ContainedButton>
     </FlexCenter>
   );

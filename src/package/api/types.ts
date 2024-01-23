@@ -1,5 +1,5 @@
-export interface ApiResponse {
-  error?: string;
-  success?: string;
-  data: any;
+interface ResponseBody<T> {
+  data: T;
+  status: "success" | "error" | "warning";
+  responseText: string;
 }

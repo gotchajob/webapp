@@ -1,14 +1,20 @@
 import { ContainedButton } from "@/components/common/button";
 import { FlexCenter } from "@/components/common/flex-box";
 import { ImageCard } from "@/components/common/image-card";
-import { InputIcon } from "@/components/common/input/input";
 import { Text } from "@/components/common/text";
 import { PRIMARYCOLOR } from "@/components/config";
+import { UserCreateVerify } from "@/package/api/user/create-verify";
 import Box from "@mui/material/Box";
-import Stack from "@mui/material/Stack";
-import Link from "next/link";
 
-export default function Page() {
+import { VerifyForm } from "./_component/verify-form";
+
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: {
+    email: string;
+  };
+}) {
   return (
     <>
       <FlexCenter mt={"50px"}>
@@ -27,29 +33,8 @@ export default function Page() {
           Xác nhận để thiết lập tài khoản
         </Text>
       </Box>
-      <FlexCenter paddingY={4}>
-        <Stack spacing={2.5}>
-          <Text
-            style={{ width: "380px" }}
-            textAlign={"center"}
-            fontWeight={"300"}
-            fontSize={14}
-          >
-            Nhập mã 4 số được gửi tới email của bạn để xác thực.
-          </Text>
-          <FlexCenter>
-            <InputIcon></InputIcon>
-            <InputIcon></InputIcon>
-            <InputIcon></InputIcon>
-            <InputIcon></InputIcon>
-          </FlexCenter>
-        </Stack>
-      </FlexCenter>
-      <FlexCenter>
-        <ContainedButton component={Link} href="/register/success">
-          Xác nhận
-        </ContainedButton>
-      </FlexCenter>
+
+      <VerifyForm searchParams={searchParams} />
     </>
   );
 }

@@ -6,9 +6,9 @@ import { Text } from "@/components/common/text";
 import { PRIMARYCOLOR } from "@/components/config";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
-import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import Link from "next/link";
+import { Form } from "./_component/login-form/form";
 
 export default function Page() {
   return (
@@ -29,58 +29,7 @@ export default function Page() {
           Hãy để chúng tôi tiếp tục đồng hành cùng bạn
         </Text>
       </Box>
-      <FlexCenter paddingY={4}>
-        <Stack spacing={2.5}>
-          <Input style={{ width: "380px" }} placeholder="Email" />
-          <Input
-            style={{ width: "380px" }}
-            placeholder="Mật khẩu"
-            type="password"
-          />
-        </Stack>
-        <FlexBetween pt={1}>
-          <Box></Box>
-          <Text
-            component={Link}
-            //@ts-ignore
-            href="/forgot-password"
-            fontSize={12}
-            color={PRIMARYCOLOR}
-            fontWeight={"700"}
-            sx={{
-              textDecoration: "underline",
-            }}
-          >
-            Quên mật khẩu?
-          </Text>
-        </FlexBetween>
-      </FlexCenter>
-      <FlexCenter>
-        <Stack spacing={3}>
-          <FlexCenter>
-            <ContainedButton>Đăng nhập</ContainedButton>
-          </FlexCenter>
-          <Divider
-            sx={{
-              width: 380,
-            }}
-          >
-            <Text fontSize={12} fontWeight={"700"} color={"#C1C1C1"}>
-              Hoặc đăng nhập bằng
-            </Text>
-          </Divider>
-          <FlexCenter>
-            <OutlinedButton>
-              <FlexBetween width={100}>
-                <ImageCard width={20} src="/assets/icon/google-icon.png" />
-                <Text fontSize={14} fontWeight={700} color={"black"}>
-                  Google
-                </Text>
-              </FlexBetween>
-            </OutlinedButton>
-          </FlexCenter>
-        </Stack>
-      </FlexCenter>
+      <Form/>
       <FlexCenter mt={16}>
         <FlexBox>
           <Text fontSize={12} fontWeight={"700"}>

@@ -5,10 +5,9 @@ import { Input } from "@/components/common/input/input";
 import { Text } from "@/components/common/text";
 import { PRIMARYCOLOR } from "@/components/config";
 import Box from "@mui/material/Box";
-import Divider from "@mui/material/Divider";
 import Grid from "@mui/material/Grid";
-import Stack from "@mui/material/Stack";
 import Link from "next/link";
+import { RegisterForm } from "./_component/register-form";
 
 export default function Page() {
   return (
@@ -29,42 +28,8 @@ export default function Page() {
           Hãy để chúng tôi tiếp tục đồng hành cùng bạn
         </Text>
       </Box>
-      <FlexCenter paddingY={4}>
-        <Grid container spacing={2.5} style={{ width: "380px" }}>
-          <Grid item xs={6}>
-            <Input style={{ width: "100%" }} placeholder="Họ" />
-          </Grid>
-          <Grid item xs={6}>
-            <Input style={{ width: "100%" }} placeholder="Tên" />
-          </Grid>
-          <Grid item xs={12}>
-            <Input style={{ width: "100%" }} placeholder="Email" type="email" />
-          </Grid>
-          <Grid item xs={12}>
-            <Input
-              style={{ width: "100%" }}
-              placeholder="Mật khẩu"
-              type="password"
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <Input
-              style={{ width: "100%" }}
-              placeholder="Xác nhận mật khẩu"
-              type="password"
-            />
-          </Grid>
-        </Grid>
-      </FlexCenter>
-      <FlexCenter>
-        <ContainedButton
-          component={Link}
-          href="/register/verify"
-        >
-          Đăng kí
-        </ContainedButton>
-      </FlexCenter>
-      <FlexCenter mt={16}>
+      <RegisterForm />
+      <FlexCenter mt={12}>
         <FlexBox>
           <Text fontSize={12} fontWeight={"700"}>
             Đã có tài khoản? Đăng nhập

@@ -28,6 +28,7 @@ export const ContainedButton = ({ children, ...props }: ButtonProps) => {
   );
 };
 
+
 export const OutlinedButton = ({ children, ...props }: ButtonProps) => {
   return (
     <Button
@@ -77,3 +78,4 @@ export const OutlinedIconButton = ({ children, ...props }: ButtonProps) => {
     </IconButton>
   );
 };
+

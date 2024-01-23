@@ -24,6 +24,8 @@ export default function RootLayout({
       redirect("/admin/dashboard");
     }
   }
+
+  console.log(config)
   return (
     <html lang="en">
       <head>

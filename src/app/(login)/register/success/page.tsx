@@ -8,7 +8,11 @@ import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Link from "next/link";
 
-export default function Page() {
+export default function Page({
+  searchParams,
+}: {
+  searchParams: { name: string };
+}) {
   return (
     <>
       <FlexCenter mt={"50px"}>
@@ -30,13 +34,13 @@ export default function Page() {
               color: PRIMARYCOLOR,
             }}
           >
-            Nguyền Văn A
+            {searchParams.name}
           </span>
           , cùng Gotcha Job khám phá những dịch vụ thú vị nhé!
         </Text>
       </Box>
       <FlexCenter pt={5}>
-        <ContainedButton component={Link} href="/" >
+        <ContainedButton component={Link} href="/login">
           Bắt đầu
         </ContainedButton>
       </FlexCenter>

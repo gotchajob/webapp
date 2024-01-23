@@ -53,7 +53,9 @@ export const Header = () => {
             },
           }}
         >
-          <OutlinedButton>Đăng kí</OutlinedButton>
+          <OutlinedButton component={Link} href="/register" sx={{ mr: 2 }}>
+            Đăng kí
+          </OutlinedButton>
           <ContainedButton component={Link} href="/login">
             Đăng nhập
           </ContainedButton>
