@@ -24,7 +24,9 @@ export const Feedback = () => {
     }
   }, [clientWidth]);
   return (
-    <Box position={"relative"} height={feedbackHeight} mt={25}>
+    <Box position={"relative"} height={feedbackHeight} mt={25} sx={{
+      display: feedbackHeight < 300 ? "none !important" : "block !important"
+    }}>
       <Box position={"absolute"} width={"100%"} zIndex={0}>
         <ImageCard
           src="/assets/images/feedback.png"
