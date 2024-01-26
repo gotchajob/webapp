@@ -5,11 +5,11 @@ import { InputIcon } from "@/components/common/input/input";
 import { ContainedLoadingButton } from "@/components/common/loading-button";
 import { Text } from "@/components/common/text";
 import { apiClientFetch } from "@/package/api/api-fetch";
-import { CreateVerifyResponse } from "@/package/api/user/create-verify";
+import { CreateVerifyResponse } from "@/package/api/user/create-verify-email";
 import {
   UserVerifyRequest,
   UserVerifyResponse,
-} from "@/package/api/user/verify";
+} from "@/package/api/user/verify-email";
 import Stack from "@mui/material/Stack";
 import { useRouter } from "next/navigation";
 import { enqueueSnackbar } from "notistack";
@@ -26,7 +26,7 @@ export const Form = ({
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   if (res.status === "error" && res.responseText === "Verified account") {
-    router.push("/login")
+    router.push("/login");
     // enqueueSnackbar(res.responseText, {
     //   variant: "error",
     // });
@@ -35,14 +35,9 @@ export const Form = ({
 
   const handleTextChange = (newNumber: string, index: number) => {
     try {
-      console.log(newNumber);
-      const number = Number.parseInt(newNumber);
-      if (number >= 0 && number <= 9) {
-        const updateInput = input;
-        updateInput[index] = newNumber;
-        setInput(updateInput);
-        console.log(input.join(""));
-      }
+      const updateInput = input;
+      updateInput[index] = newNumber;
+      setInput(updateInput);
     } catch (error) {}
   };
   const handleClick = async () => {
@@ -53,13 +48,12 @@ export const Form = ({
       };
       setIsLoading(true);
       const data: UserVerifyResponse = await apiClientFetch(
-        "/api/user/verify",
+        "/api/user/verify-email",
         value
       );
       if (data.status === "error") {
         throw new Error(data.responseText);
       }
-      console.log(data)
       router.push("/register/success?name=" + data.data.fullName);
     } catch (error: any) {
       enqueueSnackbar(error.message, {
@@ -74,7 +68,7 @@ export const Form = ({
       <FlexCenter paddingY={4}>
         <Stack spacing={2.5}>
           <Text
-            style={{ width: "380px" }}
+            style={{ maxWidth: "380px" }}
             textAlign={"center"}
             fontWeight={"300"}
             fontSize={14}
@@ -85,9 +79,8 @@ export const Form = ({
             {inputRefs.map((inputRef, index) => (
               <InputIcon
                 key={index}
-                value={input[index].toString()}
-                onChange={(e) => {
-                  handleTextChange(e.target.value.toString(), index);
+                onChange={(e: string) => {
+                  handleTextChange(e, index);
                 }}
               />
             ))}

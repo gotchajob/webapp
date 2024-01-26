@@ -13,11 +13,9 @@ export const PartnerCarousel = () => {
   const [partnerNumber, setPartnerNumber] = useState(5);
   useEffect(() => {
     if (clientWidth > 700) {
-      setPartnerNumber(5)
-    } 
-    else {
-      console.log(partnerNumber)
-      setPartnerNumber(Math.floor(clientWidth / 140))
+      setPartnerNumber(5);
+    } else {
+      setPartnerNumber(Math.floor(clientWidth / 140));
     }
   }, [clientWidth]);
   const responsive = {
@@ -37,22 +35,22 @@ export const PartnerCarousel = () => {
       items: 5,
     },
   };
-  
+
   const items = listPartner.map((partner) => {
     return (
       <FlexCenter
-      key={partner.name}
-      data-value="1"
-      sx={{
-        width: "140px",
-        paddingLeft: "40px",
-        paddingRight: "40px",
-        height: "60px !important",
-        opacity: 0.6,
-        ":hover": {
-          opacity: 1,
-        },
-      }}
+        key={partner.name}
+        data-value="1"
+        sx={{
+          width: "140px",
+          paddingLeft: "40px",
+          paddingRight: "40px",
+          height: "60px !important",
+          opacity: 0.6,
+          ":hover": {
+            opacity: 1,
+          },
+        }}
       >
         <ImageCard src={partner.logo} width={80} />
       </FlexCenter>
@@ -74,17 +72,13 @@ export const PartnerCarousel = () => {
           mouseTracking
           items={items}
           responsive={responsive}
-          />
+        />
       </Box>
     </>
   );
 };
 
 const listPartner = [
-  {
-    name: "Đại học quốc gia",
-    logo: "/assets/images/partner-1.png",
-  },
   {
     name: "Đại học quốc gia",
     logo: "/assets/images/partner-1.png",
@@ -107,6 +101,26 @@ const listPartner = [
   },
   {
     name: "Đại học quốc gia",
-    logo: "/assets/images/partner-1.png",
+    logo: "/assets/images/partner-6.png",
+  },
+  {
+    name: "Đại học quốc gia",
+    logo: "/assets/images/partner-7.png",
+  },
+  {
+    name: "Đại học quốc gia",
+    logo: "/assets/images/partner-8.png",
+  },
+  {
+    name: "Đại học quốc gia",
+    logo: "/assets/images/partner-9.png",
+  },
+  {
+    name: "Đại học quốc gia",
+    logo: "/assets/images/partner-10.png",
+  },
+  {
+    name: "Đại học quốc gia",
+    logo: "/assets/images/partner-11.png",
   },
 ];

@@ -24,8 +24,7 @@ export default function RootLayout({
       redirect("/admin/dashboard");
     }
   }
-
-  console.log(config)
+  // console.log(config);
   return (
     <html lang="en">
       <head>
@@ -35,9 +34,11 @@ export default function RootLayout({
           href="/assets/images/favicon.ico"
         />
       </head>
-      <body style={{
-        overflowX: "hidden"
-      }}>
+      <body
+        style={{
+          overflowX: "hidden",
+        }}
+      >
         <ThemeRegistry>
           <SnackbarProvider>{children}</SnackbarProvider>
         </ThemeRegistry>

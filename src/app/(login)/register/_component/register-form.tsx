@@ -37,13 +37,7 @@ export const RegisterForm = () => {
         throw new Error(data.responseText);
       }
       router.push("/register/verify?email=" + value.email);
-      // const loginData: UserLoginResponse = await apiClientFetch(
-      //   "/api/user/login",
-      //   {
-      //     email: value.email,
-      //     password: value.password,
-      //   }
-      // );
+
     } catch (error: any) {
       enqueueSnackbar(error.message, {
         variant: "error",
@@ -63,7 +57,7 @@ export const RegisterForm = () => {
   return (
     <form onSubmit={handleSubmit}>
       <FlexCenter paddingY={4}>
-        <Grid container spacing={2.5} style={{ width: "380px" }}>
+        <Grid container spacing={2.5} style={{ maxWidth: "380px" }}>
           <Grid item xs={6}>
             <Input
               name="lastName"

@@ -83,6 +83,10 @@ export const ServicePopup = ({
           paddingTop: 7,
           paddingBottom: 10,
           paddingRight: 12,
+          paddingX: {
+            xs: 3,
+            sm: 12,
+          },
           position: "relative",
         }}
       >
@@ -101,16 +105,34 @@ export const ServicePopup = ({
           <CloseIcon sx={{ color: "#B4D8ED" }} />
         </IconButton>
         <Grid container spacing={4}>
-          <Grid item xs={4.5} position={"relative"}>
+          <Grid
+            item
+            xs={0}
+            md={4.5}
+            position={"relative"}
+            sx={{
+              display: {
+                xs: "none",
+                md: "block !important",
+              },
+            }}
+          >
             <FlexCenter position={"relative"} left={-21} height={"100%"}>
               <ImageCard src={data.image} width={360} height={320} />
             </FlexCenter>
           </Grid>
-          <Grid item xs={7.5}>
+          <Grid item xs={12} md={7.5}>
             <Text mb={6} fontSize={45} fontWeight={"700"} color={PRIMARYCOLOR}>
               {data.title}
             </Text>
-            <FlexBetween>
+            <FlexBetween
+              sx={{
+                display: {
+                  xs: "block",
+                  sm: "flex !important",
+                },
+              }}
+            >
               <Text color={"#b7b8b9"} fontSize={12}>
                 <span style={{ color: "#49a0d3" }}>{data.useTime} lượt </span>sử
                 dụng dịch vụ
@@ -138,43 +160,71 @@ export const ServicePopup = ({
             <Text my={1} fontSize={20} fontWeight={"700"} color={PRIMARYCOLOR}>
               Mô tả:
             </Text>
-            <Stack spacing={1}>{children}</Stack>
-            <FlexBox mt={3}>
-              <FlexCenter
-                py={3}
-                px={3.5}
-                bgcolor={"#F2FAFF"}
-                boxShadow="0px 6px 12px rgba(21.95, 98.70, 142.38, 0.20)"
-                borderRadius={55}
-                mr={5}
-                overflow="hidden"
-              >
-                <Text color={"#0E82C4"} fontWeight={700} fontSize={20}>
-                  {data.price === 0 ? (
-                    <span
-                      style={{
-                        fontSize: 30,
-                      }}
-                    >
-                      Miễn phí
-                    </span>
-                  ) : (
-                    <>
+            <Stack spacing={1} maxHeight={150} sx={{ overflowY: "scroll" }}>
+              {children}
+            </Stack>
+            <FlexBox
+              mt={3}
+              sx={{
+                display: {
+                  xs: "block",
+                  700: "flex !important",
+                },
+                justifyContent: {
+                  xs: "center",
+                  700: "none !important",
+                },
+              }}
+            >
+              <FlexCenter>
+                <FlexCenter
+                  py={3}
+                  px={3.5}
+                  bgcolor={"#F2FAFF"}
+                  boxShadow="0px 6px 12px rgba(21.95, 98.70, 142.38, 0.20)"
+                  borderRadius={55}
+                  sx={{
+                    width: "fit-content",
+                    marginRight: {
+                      xs: 0,
+                      700: "20px !important",
+                    },
+                    marginBottom: {
+                      xs: "20px",
+                      700: "0px !important",
+                    },
+                  }}
+                  overflow="hidden"
+                >
+                  <Text color={"#0E82C4"} fontWeight={700} fontSize={20}>
+                    {data.price === 0 ? (
                       <span
                         style={{
-                          fontSize: 25,
+                          fontSize: 30,
                         }}
                       >
-                        {formatNumber(data.price)} VND/
+                        Miễn phí
                       </span>
-                      {data.priceDes}
-                    </>
-                  )}
-                </Text>
+                    ) : (
+                      <>
+                        <span
+                          style={{
+                            fontSize: 25,
+                          }}
+                        >
+                          {formatNumber(data.price)} VND/
+                        </span>
+                        {data.priceDes}
+                      </>
+                    )}
+                  </Text>
+                </FlexCenter>
               </FlexCenter>
-              <ContainedButton onClick={handleClick}>
-                {data.price === 0 ? "Trải nghiệm ngay" : "Mua ngay"}
-              </ContainedButton>
+              <FlexCenter>
+                <ContainedButton onClick={handleClick}>
+                  {data.price === 0 ? "Trải nghiệm ngay" : "Mua ngay"}
+                </ContainedButton>
+              </FlexCenter>
             </FlexBox>
           </Grid>
         </Grid>
@@ -328,14 +378,20 @@ export const SmartTUMServicePopup = ({
       }}
     >
       <StyledText>
-        Làm CV dựa theo vị trí công việc người dùng đang mong muốn ứng tuyển.
+        Dịch vụ SmartTUM là dịch vụ{" "}
+        <span style={{ fontWeight: 700 }}>
+          kết nối tự động giữa NTD và ứng viên
+        </span>{" "}
+        dựa vào Mô tả công việc và CV của ứng viên
       </StyledText>
       <StyledText>
-        Lựa chọn và chắt lọc những thông tin giá trị nhất để đưa vào CV.
-      </StyledText>
-      <StyledText>
-        Đồng thời đưa ra lời khuyên về kiến thức, kỹ năng mà người dùng cần cải
-        thiện để CV hoàn thiện và được đánh giá cao trong mắt NTD.
+        <span style={{ fontWeight: 700 }}>Lợi ích ứng viên nhận được</span> khi
+        sử dụng DV:<br/>
+        1. Được matching với các NTD uy tín, phù hợp với mong muốn công việc của bản thân<br/>
+        2. Theo dõi được tình trạng của CV<br/>
+        3. CV đã được gửi đến NTD chưa?<br/>
+        4. NTD đã xem CV chưa?<br/>
+        5. Theo dõi được mức độ cạnh tranh của bản thân so với các ứng viên khác<br/>
       </StyledText>
     </ServicePopup>
   );

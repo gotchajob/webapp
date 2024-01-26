@@ -26,10 +26,11 @@ export const UserLogin = async (
 ): Promise<UserLoginResponse> => {
   try {
     const res = await apiServerFetch("/user/login", "POST", params);
-    console.log(res)
+    if (res.status === "error") {
+      throw new Error("");
+    }
     return res;
   } catch (error: any) {
-    console.log(error.message);
-    return errorSystem("Đăng nhập thất bại", { data: { token: "" } });
+    return errorSystem("Đăng nhập thất bại", { token: "" });
   }
 };

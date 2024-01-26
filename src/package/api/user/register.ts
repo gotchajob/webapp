@@ -21,7 +21,6 @@ export const UserRegister = async (
     const userRegister = await apiServerFetch("/user/register", "POST", params);
     return userRegister;
   } catch (error: any) {
-    console.log(error.message);
     return errorSystem("Đăng kí thất bại", "");
   }
 };

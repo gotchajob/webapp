@@ -5,10 +5,14 @@ import { InputIcon } from "@/components/common/input/input";
 import { Text } from "@/components/common/text";
 import { PRIMARYCOLOR } from "@/components/config";
 import Box from "@mui/material/Box";
-import Stack from "@mui/material/Stack";
-import Link from "next/link";
+import { VerifyForm } from "./_component/password-verify-form";
+import { Suspense } from "react";
 
-export default function Page() {
+export default function Page({
+  searchParams,
+}: {
+  searchParams: { email: string };
+}) {
   return (
     <>
       <FlexCenter mt={"50px"}>
@@ -27,32 +31,9 @@ export default function Page() {
           Đừng lo, Gotcha Job sẽ giúp bạn lấy lại mật khẩu
         </Text>
       </Box>
-      <FlexCenter paddingY={4}>
-        <Stack spacing={2.5}>
-          <Text
-            style={{ width: "380px" }}
-            textAlign={"center"}
-            fontWeight={"300"}
-            fontSize={14}
-          >
-            Nhập mã 4 số được gửi tới email của bạn để xác thực.
-          </Text>
-          <FlexCenter>
-            <InputIcon></InputIcon>
-            <InputIcon></InputIcon>
-            <InputIcon></InputIcon>
-            <InputIcon></InputIcon>
-          </FlexCenter>
-        </Stack>
-      </FlexCenter>
-      <FlexCenter>
-        <ContainedButton
-          component={Link}
-          href="/forgot-password/reset-password"
-        >
-          Xác nhận
-        </ContainedButton>
-      </FlexCenter>
+      <Suspense fallback={null}>
+        <VerifyForm searchParams={searchParams} />
+      </Suspense>
     </>
   );
 }

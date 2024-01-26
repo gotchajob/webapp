@@ -14,10 +14,9 @@ export const UserCreateVerify = async (
   params: CreateVerifyRequest
 ): Promise<CreateVerifyResponse> => {
   try {
-    const userRegister = await apiServerFetch("/user/create-verify", "POST", params);
+    const userRegister = await apiServerFetch("/user/create-verify-email", "POST", params);
     return userRegister;
   } catch (error: any) {
-    console.log(error.message);
     return errorSystem("Xác thực thất bại", "");
   }
 };

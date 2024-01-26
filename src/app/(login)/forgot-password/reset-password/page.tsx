@@ -5,12 +5,13 @@ import { Input } from "@/components/common/input/input";
 import { Text } from "@/components/common/text";
 import { PRIMARYCOLOR } from "@/components/config";
 import Box from "@mui/material/Box";
-import Divider from "@mui/material/Divider";
-import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
-import Link from "next/link";
+import { ResetPasswordForm } from "./_component/form";
 
-export default function Page() {
+export default function Page({searchParams} : {searchParams: {
+  email: string,
+  code: string
+}}) {
   return (
     <>
       <FlexCenter mt={"50px"}>
@@ -29,31 +30,7 @@ export default function Page() {
           Đừng lo, Gotcha Job sẽ giúp bạn lấy lại mật khẩu
         </Text>
       </Box>
-      <FlexCenter paddingY={4}>
-        <Stack spacing={2.5}>
-          <Text
-            style={{ width: "380px" }}
-            textAlign={"center"}
-            fontWeight={"300"}
-            fontSize={14}
-          >
-            Thiết lập lại mật khẩu
-          </Text>
-          <Input
-            style={{ width: "380px" }}
-            placeholder="Mật khẩu"
-            type="password"
-          />
-          <Input
-            style={{ width: "380px" }}
-            placeholder="Xác nhận mật khẩu"
-            type="password"
-          />
-        </Stack>
-      </FlexCenter>
-      <FlexCenter>
-        <ContainedButton>Xong</ContainedButton>
-      </FlexCenter>
+      <ResetPasswordForm email={searchParams.email} code={searchParams.code}/>
     </>
   );
 }

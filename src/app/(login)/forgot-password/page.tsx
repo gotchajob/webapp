@@ -9,6 +9,7 @@ import Divider from "@mui/material/Divider";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import Link from "next/link";
+import { ForgotPasswordForm } from "./_component/form";
 
 export default function Page() {
   return (
@@ -29,25 +30,7 @@ export default function Page() {
           Đừng lo, Gotcha Job sẽ giúp bạn lấy lại mật khẩu
         </Text>
       </Box>
-      <FlexCenter paddingY={4}>
-        <Stack spacing={2.5}>
-          <Text
-            style={{ width: "380px" }}
-            textAlign={"center"}
-            fontWeight={"300"}
-            fontSize={14}
-          >
-            Nhập email của bạn để nhận mã xác minh, chúng tôi sẽ gửi mã gồm 4
-            chữ số đến email của bạn.
-          </Text>
-          <Input style={{ width: "380px" }} placeholder="Email" />
-        </Stack>
-      </FlexCenter>
-      <FlexCenter>
-        <ContainedButton component={Link} href="/forgot-password/verify">
-          Tiếp tục
-        </ContainedButton>
-      </FlexCenter>
+      <ForgotPasswordForm />
       <FlexCenter mt={30}>
         <FlexBox>
           <Text fontSize={12} fontWeight={"700"}>

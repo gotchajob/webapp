@@ -17,7 +17,13 @@
   outline: none;
 }
 
-
+.input:disabled {
+  background-color: #d9d9d9;
+}
+.input:disabled::placeholder {
+  font-size: 20px;
+  color: #b7b7b7;
+}
 /* CSS để ẩn spinner */
 .input::-webkit-inner-spin-button,
 .input::-webkit-outer-spin-button {

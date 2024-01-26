@@ -16,3 +16,10 @@ export const CVIcon = ({ width }: { width?: number | string }) => {
 export const SmartTumIcon = ({ width }: { width?: number | string }) => {
   return <ImageCard width={width} src="/assets/icon/smart-tum-icon.png" />;
 };
+
+export const UserIcon = ({ width }: { width?: number | string }) => {
+  return <ImageCard width={width} src="/assets/icon/user.png" />;
+};
+export const CartIcon = ({ width }: { width?: number | string }) => {
+  return <ImageCard width={width} src="/assets/icon/cart.png" />;
+};

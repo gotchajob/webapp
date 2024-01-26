@@ -5,7 +5,8 @@ import { PriceCard } from "./price-card";
 import { Text } from "@/components/common/text";
 import { useState } from "react";
 import { PricePopup } from "@/components/popup/price-popup";
-export const MockInterviewPriceCard = () => {
+import { UserCurrentResponse } from "@/package/api/user/current";
+export const MockInterviewPriceCard = ({user} : {user?: UserCurrentResponse}) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <>
@@ -25,7 +26,7 @@ export const MockInterviewPriceCard = () => {
           </Text>
         </FlexBox>
       </PriceCard>
-      <PricePopup isOpen={isOpen} setIsOpen={setIsOpen} />
+      <PricePopup isOpen={isOpen} setIsOpen={setIsOpen} user={user}/>
     </>
   );
 };

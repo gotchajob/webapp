@@ -6,6 +6,6 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(req: NextRequest): Promise<NextResponse> {
   const params = await req.json();
   const data = await UserLogin(params);
-  setUserToken(data.data.token, cookies())
+  setUserToken(data.data.token || "", cookies())
   return NextResponse.json(data);
 }

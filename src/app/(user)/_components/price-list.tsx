@@ -4,19 +4,24 @@ import { PartnerTrainingPriceCard } from "@/components/card/price-card/partner-t
 import { SmartTUMPriceCard } from "@/components/card/price-card/smart-tum-price-card";
 import { FlexCenter } from "@/components/common/flex-box";
 import { MainTitle } from "@/components/common/text";
+import { UserCurrent } from "@/package/api/user/current";
+import { getUserToken } from "@/package/cookies/token";
 
 import Grid from "@mui/material/Grid";
+import { cookies } from "next/headers";
 
-export const PriceList = () => {
+export const PriceList = async() => {
+  const accessToken = await getUserToken(cookies())
+  const user = await UserCurrent(accessToken)
   return (
     <>
       <MainTitle py={10} pt={30} id={"priceDiv"}>
         Giá cả
       </MainTitle>
-      <Grid container sx={{ width: "760px" }}>
+      <Grid container sx={{ maxWidth: "760px" }}>
         <Grid item xs={12} sm={6}>
           <FlexCenter>
-            <MockInterviewPriceCard />
+            <MockInterviewPriceCard user={user}/>
           </FlexCenter>
         </Grid>
         <Grid

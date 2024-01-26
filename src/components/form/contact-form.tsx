@@ -5,15 +5,40 @@ import * as yup from "yup";
 import { Input } from "../common/input/input";
 import { ContainedButton } from "../common/button";
 import { FlexBetween } from "../common/flex-box";
+import { AdviceServiceRequest, AdviceServiceResponse } from "@/package/api/home/advice-service";
+import { apiClientFetch } from "@/package/api/api-fetch";
+import { enqueueSnackbar } from "notistack";
 export const ContactForm = () => {
-  const handleSubmitForm = () => {
-    console.log("hello");
+  const handleSubmitForm = async (values: any) => {
+    try {
+      const params: AdviceServiceRequest = {
+        advise: values.description,
+        email: values.email,
+        phone: values.phone,
+        fullName: values.name
+      }
+      const data: AdviceServiceResponse = await apiClientFetch(
+        "/api/home/advice-service",
+        params
+      );
+      if (data.status === "error") {
+        throw new Error(data.responseText);
+      }
+      enqueueSnackbar("Đã gửi thành công", {
+        variant: "success",
+      });
+    } catch (error: any) {
+      enqueueSnackbar(error.message, {
+        variant: "error",
+      });
+    } finally {
+    }
   };
   const initialValues = {
     name: "",
     email: "",
     phone: "",
-    description: ""
+    description: "",
   };
   const validationSchema = yup.object().shape({
     name: yup.string().required("Bắt buộc"),
@@ -42,7 +67,7 @@ export const ContactForm = () => {
             helperText={(touched.name && errors.name) as string}
           />
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={12} sm={4}>
           <Input
             style={{ width: "100%" }}
             name="phone"
@@ -54,7 +79,7 @@ export const ContactForm = () => {
             helperText={(touched.phone && errors.phone) as string}
           />
         </Grid>
-        <Grid item xs={8}>
+        <Grid item xs={12} sm={8}>
           <Input
             style={{ width: "100%" }}
             name="email"
@@ -66,7 +91,7 @@ export const ContactForm = () => {
             helperText={(touched.email && errors.email) as string}
           />
         </Grid>
-        <Grid item xs={9.5}>
+        <Grid item xs={12} sm={9.5}>
           <Input
             multiline
             rows={4}
@@ -80,7 +105,7 @@ export const ContactForm = () => {
             helperText={(touched.description && errors.description) as string}
           />
         </Grid>
-        <Grid item xs={2.5}>
+        <Grid item xs={12} md={2.5}>
           <FlexBetween alignItems={"flex-end"} height={"90%"}>
             <div></div>
             <ContainedButton type="submit">Gửi</ContainedButton>

@@ -22,25 +22,46 @@ import { ContainedButton } from "../common/button";
 import { ContainedCard } from "../common/card";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
+import { UserCurrentResponse } from "@/package/api/user/current";
+import {
+  OrderServiceRequest,
+  OrderServiceResponse,
+} from "@/package/api/home/order-service";
+import { apiClientFetch } from "@/package/api/api-fetch";
+import { enqueueSnackbar } from "notistack";
+import { ContainedLoadingButton } from "../common/loading-button";
 
 export interface Tab {
   title: string;
   component: ReactNode;
 }
 
-export const PricePopup = ({
-  isOpen,
-  setIsOpen,
-}: {
+export interface PricePopupProps {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
-}) => {
+  user?: UserCurrentResponse;
+}
+export const PricePopup = ({ isOpen, setIsOpen, user }: PricePopupProps) => {
   const [tabList, setTabList] = useState<Tab[]>([]);
+  const [orderServiceProps, setOrderServiceProps] =
+    useState<OrderServiceRequest>({
+      email: user?.data?.email ? user?.data.email : "",
+      fullName:
+        (user?.data?.firstName ? user?.data.firstName + " " : "") +
+        (user?.data?.lastName ? user?.data.lastName : ""),
+      phone: "",
+    });
   const [nextPageTitle, setNextPageTitle] = useState("");
   const tabListCard: Tab[] = [
     {
       title: "Điền thông tin cá nhân",
-      component: <TakeInformation setNextPageTitle={setNextPageTitle} />,
+      component: (
+        <TakeInformation
+          initvalue={orderServiceProps}
+          setNextPageTitle={setNextPageTitle}
+          setOrderServiceProps={setOrderServiceProps}
+        />
+      ),
     },
     {
       title: "Chú thích",
@@ -59,6 +80,27 @@ export const PricePopup = ({
     setTabList([tabListCard[0]]);
   }, [isOpen]);
   const [openSuccess, setOpenSuccess] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const confirmOrderService = async () => {
+    try {
+      setIsLoading(true);
+      const data: OrderServiceResponse = await apiClientFetch(
+        "/api/home/order-service",
+        orderServiceProps
+      );
+      if (data.status === "error") {
+        throw new Error(data.responseText);
+      }
+      setOpenSuccess(true);
+      setIsOpen(false);
+    } catch (error: any) {
+      enqueueSnackbar(error.message, {
+        variant: "error",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
   return (
     <>
       <Dialog
@@ -83,7 +125,22 @@ export const PricePopup = ({
           }}
         >
           <Grid container height={"100%"}>
-            <Grid item xs={7} py={7} px={6} position={"relative"}>
+            <Grid
+              item
+              xs={12}
+              sm={7}
+              sx={{
+                py: {
+                  xs: 7,
+                  sm: 7,
+                },
+                px: {
+                  xs: 3,
+                  sm: 6,
+                },
+              }}
+              position={"relative"}
+            >
               <Stack spacing={3} mb={2}>
                 <FlexBox>
                   <ArrowBackIcon
@@ -118,7 +175,15 @@ export const PricePopup = ({
                   </Text>
                 </Box>
               </Stack>
-              {tabList.at(tabList.length - 1)?.component}
+              <Box
+                sx={{
+                  height: 250,
+                  pl: 1,
+                  overflowY: "scroll",
+                }}
+              >
+                {tabList.at(tabList.length - 1)?.component}
+              </Box>
 
               {tabList.length < 4 ? (
                 <FlexCenter
@@ -153,18 +218,28 @@ export const PricePopup = ({
                   width={"100%"}
                   right={0}
                 >
-                  <ContainedButton
+                  <ContainedLoadingButton
+                    loading={isLoading}
                     onClick={() => {
-                      setOpenSuccess(true);
-                      setIsOpen(false);
+                      confirmOrderService();
                     }}
                   >
                     Kiểm tra thanh toán
-                  </ContainedButton>
+                  </ContainedLoadingButton>
                 </FlexCenter>
               )}
             </Grid>
-            <Grid item xs={5}>
+            <Grid
+              item
+              xs={0}
+              sm={5}
+              sx={{
+                display: {
+                  xs: "none",
+                  sm: "block !important",
+                },
+              }}
+            >
               <ImageCard height={"100%"} src="/assets/images/illu-2.png" />
             </Grid>
           </Grid>
@@ -238,14 +313,20 @@ export const PriceSuccessPopup = ({
 };
 const TakeInformation = ({
   setNextPageTitle,
+  setOrderServiceProps,
+  initvalue,
 }: {
+  initvalue: OrderServiceRequest;
   setNextPageTitle: Dispatch<SetStateAction<string>>;
+  setOrderServiceProps: Dispatch<SetStateAction<OrderServiceRequest>>;
 }) => {
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
+  console.log(initvalue);
+  const [name, setName] = useState(initvalue.fullName);
+  const [phone, setPhone] = useState(initvalue.phone);
+  const [email, setEmail] = useState(initvalue.email);
   useEffect(() => {
     if (name.length > 0 && phone.length > 0 && email.length > 0) {
+      setOrderServiceProps({ email, fullName: name, phone });
       setNextPageTitle("Chú thích");
     } else {
       setNextPageTitle("");
@@ -257,8 +338,9 @@ const TakeInformation = ({
         Vui lòng điền đầy đủ thông tin dưới đây
       </Text>
       <Grid container spacing={2}>
-        <Grid item xs={7}>
+        <Grid item xs={12} sm={7}>
           <Input
+            value={name}
             placeholder="Họ và tên"
             onChange={(e) => {
               setName(e.target.value);
@@ -268,8 +350,9 @@ const TakeInformation = ({
             }}
           />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12} sm={6}>
           <Input
+            value={phone}
             placeholder="Số điện thoại"
             onChange={(e) => {
               setPhone(e.target.value);
@@ -279,8 +362,9 @@ const TakeInformation = ({
             }}
           />
         </Grid>
-        <Grid item xs={7}>
+        <Grid item xs={12} sm={7}>
           <Input
+            value={email}
             placeholder="Email"
             onChange={(e) => {
               setEmail(e.target.value);
@@ -353,7 +437,6 @@ const ServicePayment = ({
         Chọn phương thức thanh toán
       </Text>
       <RadioGroup
-        aria-labelledby="demo-radio-buttons-group-label"
         defaultValue="female"
         name="radio-buttons-group"
         onChange={(e) => {
@@ -392,7 +475,13 @@ const ServicePayment = ({
 const QRPayment = () => {
   return (
     <FlexCenter>
-      <Box padding={1} mb={1} paddingBottom={0} borderRadius={2} border={"2px solid #0E82C4"}>
+      <Box
+        padding={1}
+        mb={1}
+        paddingBottom={0}
+        borderRadius={2}
+        border={"2px solid #0E82C4"}
+      >
         <ImageCard src="/assets/images/QRPay.png" width={150} />
       </Box>
       <Text textAlign={"center"} fontSize={14}>

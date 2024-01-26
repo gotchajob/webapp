@@ -15,12 +15,15 @@ export const Banner = () => {
   useEffect(() => {
     if (document !== null) {
       const bannerHeight =
-        document.getElementById("imageBannerId")?.clientHeight || 753.36;
+        document.getElementById("imageBannerId")?.clientHeight;
+        //@ts-ignore
       setBannerHeight(bannerHeight);
     }
   }, [clientWidth]);
   return (
-    <Box position={"relative"} height={bannerHeight}>
+    <Box position={"relative"} height={bannerHeight} sx={{
+      display: bannerHeight < 250 ? "none !important" : "block !important"
+    }}>
       <Box position={"absolute"} width={"100%"} zIndex={0} >
         <ImageCard src="/assets/images/banner.png" id={"imageBannerId"}/>
       </Box>

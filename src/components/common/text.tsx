@@ -3,7 +3,7 @@ import { PRIMARYCOLOR } from "../config";
 
 export const maxLineStyle = (maxLine: number) => {
   return {
-    maxHeight: `${1.2 * maxLine}em`, // Chiều cao tối đa của 2 dòng với line-height 1.5
+    maxHeight: `${1.3 * maxLine}em`, // Chiều cao tối đa của 2 dòng với line-height 1.5
     lineHeight: `1.2`,
     overflow: "hidden",
     textverflow: "ellipsis",

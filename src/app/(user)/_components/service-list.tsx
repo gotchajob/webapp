@@ -8,6 +8,7 @@ import {
   CVIcon,
   MockInterviewIcon,
   PartnerTrainingIcon,
+  SmartTumIcon,
 } from "@/components/icon/mock-interview-icon";
 import Grid from "@mui/material/Grid";
 
@@ -35,7 +36,7 @@ export const ServiceList = () => {
         "Xây dựng CV giúp làm nổi bật thế mạnh & gây ấn tượng cho nhà tuyển dụng",
     },
     {
-      icon: <MockInterviewIcon />,
+      icon: <SmartTumIcon />,
       title: "Smart TUM",
       popupType: "Smart TUM",
       description:

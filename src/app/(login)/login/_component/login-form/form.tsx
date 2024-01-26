@@ -44,20 +44,20 @@ export const Form = () => {
 
   return (
     <>
-      <FlexCenter paddingY={4}>
+      <Box paddingY={4} sx={{ maxWidth: "380px", width: "100%", margin: "auto" }}>
         <Stack spacing={2.5}>
           <Input
             onChange={(e) => {
               setEmail(e.currentTarget.value);
             }}
-            style={{ width: "380px" }}
+            
             placeholder="Email"
           />
           <Input
             onChange={(e) => {
               setPassword(e.currentTarget.value);
             }}
-            style={{ width: "380px" }}
+            style={{ maxWidth: "380px" }}
             placeholder="Mật khẩu"
             type="password"
           />
@@ -78,7 +78,7 @@ export const Form = () => {
             Quên mật khẩu?
           </Text>
         </FlexBetween>
-      </FlexCenter>
+      </Box>
       <FlexCenter>
         <Stack spacing={3}>
           <FlexCenter>
@@ -88,7 +88,7 @@ export const Form = () => {
           </FlexCenter>
           <Divider
             sx={{
-              width: 380,
+              maxWidth: 380,
             }}
           >
             <Text fontSize={12} fontWeight={"700"} color={"#C1C1C1"}>

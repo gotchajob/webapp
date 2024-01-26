@@ -2,12 +2,14 @@ import Container from "@mui/material/Container";
 import { ImageCard } from "../common/image-card";
 import { FlexBetween, FlexBox } from "../common/flex-box";
 import Link from "next/link";
-import { NavigationItem } from "./nav-item";
+import { LogoutButton, NavigationItem } from "./nav-item";
 import { ContainedButton, OutlinedButton } from "../common/button";
 import { MenuDrawler } from "./menu-drawler";
 import LoginIcon from "@mui/icons-material/Login";
+import LogoutIcon from "@mui/icons-material/Logout";
 import IconButton from "@mui/material/IconButton";
-export const Header = () => {
+import { CartIcon, UserIcon } from "../icon/mock-interview-icon";
+export const Header = ({ alreadyLogin }: { alreadyLogin: boolean }) => {
   return (
     <Container
       maxWidth="xl"
@@ -21,7 +23,7 @@ export const Header = () => {
         boxShadow: " 0px 4px 30px 0px rgba(8, 78, 118, 0.20);",
       }}
     >
-      <FlexBetween maxWidth={1312} margin={"auto"} px={2}>
+      <FlexBetween maxWidth={1350} margin={"auto"} px={2}>
         <MenuDrawler
           sx={{
             display: {
@@ -30,7 +32,7 @@ export const Header = () => {
             },
           }}
         />
-        <Link href={"/"}>
+        <Link href={"/"} style={{ paddingTop: 7 }}>
           <ImageCard src="/assets/images/logo.png" width={180} />
         </Link>
         <FlexBox
@@ -44,36 +46,48 @@ export const Header = () => {
         >
           <NavigationItem />
         </FlexBox>
-        <FlexBox
-          sx={{
-            display: {
-              xl: "flex !important",
-              sm: "flex !important",
-              xs: "none",
-            },
-          }}
-        >
-          <OutlinedButton component={Link} href="/register" sx={{ mr: 2 }}>
-            Đăng kí
-          </OutlinedButton>
-          <ContainedButton component={Link} href="/login">
-            Đăng nhập
-          </ContainedButton>
-        </FlexBox>
-        <IconButton
-          size="large"
-          component={Link}
-          href="/login"
-          sx={{
-            display: {
-              xl: "none !important",
-              sm: "none !important",
-              xs: "flex",
-            },
-          }}
-        >
-          <LoginIcon color="primary" />
-        </IconButton>
+        {alreadyLogin ? (
+          <FlexBox>
+            <IconButton size="small">
+              <CartIcon width={36} />
+            </IconButton>
+            <IconButton size="small">
+              <UserIcon width={36} />
+            </IconButton>
+            <LogoutButton />
+          </FlexBox>
+        ) : (
+          <>
+            <FlexBox
+              sx={{
+                display: {
+                  xl: "flex !important",
+                  sm: "flex !important",
+                  xs: "none",
+                },
+              }}
+            >
+              <OutlinedButton component={Link} href="/register" sx={{ mr: 2 }}>
+                Đăng kí
+              </OutlinedButton>
+              <ContainedButton component={Link} href="/login">
+                Đăng nhập
+              </ContainedButton>
+            </FlexBox>
+            <IconButton
+              size="large"
+              sx={{
+                display: {
+                  xl: "none !important",
+                  sm: "none !important",
+                  xs: "flex",
+                },
+              }}
+            >
+              <LoginIcon color="primary" />
+            </IconButton>
+          </>
+        )}
       </FlexBetween>
     </Container>
   );

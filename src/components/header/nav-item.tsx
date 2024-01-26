@@ -6,7 +6,10 @@ import Link from "next/link";
 import { Text } from "../common/text";
 import { FlexBetween } from "../common/flex-box";
 import { PRIMARYCOLOR } from "../config";
-
+import LogoutIcon from "@mui/icons-material/Logout";
+import IconButton from "@mui/material/IconButton";
+import { apiClientFetch } from "@/package/api/api-fetch";
+import { enqueueSnackbar } from "notistack";
 export const NavigationItem = () => {
   const navItemList = [
     { name: "Dịch vụ", targetId: "serviceDiv", icon: ArrowDropDownIcon },
@@ -54,5 +57,35 @@ export const NavigationItem = () => {
         </Text>
       </Box>
     </>
+  );
+};
+
+export const LogoutButton = () => {
+  const onClick = async () => {
+    try {
+      const res = await apiClientFetch("/api/user/logout");
+      if (res.status === "error") {
+        throw new Error("Không thể đăng xuất");
+      }
+      enqueueSnackbar(res.responseText, {
+        variant: "success",
+      });
+      window.location.href = "/"
+    } catch (error: any) {
+      enqueueSnackbar(error.message, {
+        variant: "error",
+      });
+    }
+  };
+  return (
+    <IconButton size="medium" onClick={onClick}>
+      <LogoutIcon
+        sx={{
+          width: 26,
+          height: 26,
+        }}
+        color="primary"
+      />
+    </IconButton>
   );
 };

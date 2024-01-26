@@ -8,6 +8,7 @@ import { ImageCard } from "../common/image-card";
 import ArrowRight from "@mui/icons-material/ArrowRight";
 import { Input } from "../common/input/input";
 import { ContainedButton } from "../common/button";
+import { SubscribeForm } from "./subscribe-form";
 
 export const Footer = () => {
   return (
@@ -84,14 +85,7 @@ export const Footer = () => {
             }}
           >
             <Title>Tin tức mới</Title>
-            <Stack spacing={3}>
-              <Text fontSize={15} color={"white"} fontWeight={200}>
-                Đăng ký bằng Email của bạn để nhận được tin tức mới nhất của
-                chúng tôi
-              </Text>
-              <Input placeholder="Email"></Input>
-              <ContainedButton>Đăng kí</ContainedButton>
-            </Stack>
+            <SubscribeForm/>
           </Grid>
         </Grid>
       </Box>

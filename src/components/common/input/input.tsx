@@ -1,8 +1,9 @@
-"use client"
+"use client";
 import "../input/styles.scss";
 import { PRIMARYCOLOR } from "../../config";
 import { TextFieldProps } from "@mui/material/TextField";
 import { Text } from "../text";
+import { ChangeEvent, use, useState } from "react";
 
 export const Input = ({
   helperText,
@@ -17,7 +18,9 @@ export const Input = ({
         <textarea
           {...props}
           className="input"
- 
+          style={{
+            ...props.style,
+          }}
         />
       ) : (
         // @ts-ignore
@@ -31,11 +34,28 @@ export const Input = ({
     </>
   );
 };
-export const InputIcon = ({ ...props }: TextFieldProps) => {
+export const InputIcon = ({ onChange, ...props }: any) => {
+  const [input, setInput] = useState("");
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    try {
+      let number = input;
+      const newNumber = Number.parseInt(e.target.value.toString());
+      if (newNumber >= 0 && newNumber <= 9) {
+        number = newNumber.toString();
+        onChange(number);
+        setInput(number);
+      } else if (e.target.value.toString() === "") {
+        setInput("");
+        onChange("");
+      }
+    } catch (error) {}
+  };
   return (
     //@ts-ignore
     <input
       {...props}
+      value={input}
+      onChange={handleChange}
       style={{
         margin: "0px 10px",
         borderRadius: "50px",

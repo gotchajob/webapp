@@ -3,10 +3,11 @@ import { FlexCenter } from "@/components/common/flex-box";
 import { ImageCard } from "@/components/common/image-card";
 import { Text } from "@/components/common/text";
 import { PRIMARYCOLOR } from "@/components/config";
-import { UserCreateVerify } from "@/package/api/user/create-verify";
+import { UserCreateVerify } from "@/package/api/user/create-verify-email";
 import Box from "@mui/material/Box";
 
 import { VerifyForm } from "./_component/verify-form";
+import { Suspense } from "react";
 
 export default async function Page({
   searchParams,
@@ -34,7 +35,9 @@ export default async function Page({
         </Text>
       </Box>
 
-      <VerifyForm searchParams={searchParams} />
+      <Suspense fallback={null}>
+        <VerifyForm searchParams={searchParams} />
+      </Suspense>
     </>
   );
 }
