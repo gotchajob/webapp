@@ -11,6 +11,7 @@ import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 
 export const Banner = () => {
   const [bannerHeight, setBannerHeight] = useState(753.36);
+  const [update, setUpdate] = useState(0)
   const clientWidth = useWindowSize();
   useEffect(() => {
     if (document !== null) {
@@ -19,13 +20,16 @@ export const Banner = () => {
         //@ts-ignore
       setBannerHeight(bannerHeight);
     }
-  }, [clientWidth]);
+    if (update === 0) {
+      setUpdate(1)
+    }
+  }, [clientWidth, update]);
   return (
     <Box position={"relative"} height={bannerHeight} sx={{
       display: bannerHeight < 250 ? "none !important" : "block !important"
     }}>
       <Box position={"absolute"} width={"100%"} zIndex={0} >
-        <ImageCard src="/assets/images/banner.png" id={"imageBannerId"}/>
+        <ImageCard src="/assets/images/banner.png"  id={"imageBannerId"}/>
       </Box>
       <FlexCenter
         position="absolute"
