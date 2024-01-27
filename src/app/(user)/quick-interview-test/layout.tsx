@@ -1,8 +1,15 @@
 import { Text } from "@/components/common/text";
+import { getUserToken } from "@/package/cookies/token";
 import Box from "@mui/material/Box";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 import { ReactNode } from "react";
 
 export default async function Layout({ children }: { children: ReactNode }) {
+  const userToken = await getUserToken(cookies())
+  if (userToken === "" ) {
+    redirect("/login")
+  }
   return (
     <Box maxWidth={1350} px={2} margin={"auto"}>
       <Text color={"#b7b8b9"} fontSize={12} py={7}>

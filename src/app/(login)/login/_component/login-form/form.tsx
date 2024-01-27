@@ -20,6 +20,7 @@ export const Form = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
   const handleLogin = async () => {
     try {
       setIsLoading(true);
@@ -34,9 +35,16 @@ export const Form = () => {
         window.location.href = "/";
       }
     } catch (error: any) {
-      enqueueSnackbar(error.message, {
-        variant: "error",
-      });
+      if (error.message === "User is disabled") {
+        router.push("/register/verify?email=" + email);
+        enqueueSnackbar("Bạn phải xác thực email trước khi đăng nhập", {
+          variant: "error",
+        });
+      } else {
+        enqueueSnackbar(error.message, {
+          variant: "error",
+        });
+      }
     } finally {
       setIsLoading(false);
     }
@@ -44,13 +52,15 @@ export const Form = () => {
 
   return (
     <>
-      <Box paddingY={4} sx={{ maxWidth: "380px", width: "100%", margin: "auto" }}>
+      <Box
+        paddingY={4}
+        sx={{ maxWidth: "380px", width: "100%", margin: "auto" }}
+      >
         <Stack spacing={2.5}>
           <Input
             onChange={(e) => {
               setEmail(e.currentTarget.value);
             }}
-            
             placeholder="Email"
           />
           <Input

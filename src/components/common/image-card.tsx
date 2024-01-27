@@ -4,6 +4,7 @@ export const ImageCard = ({
   id,
   width = "100%",
   height = "auto",
+  borderRadius
 }: {
   height?: string | number;
   src: string;
@@ -23,6 +24,7 @@ export const ImageCard = ({
         objectPosition: "center",
         borderTopLeftRadius: "inherit",
         borderTopRightRadius: "inherit",
+        borderRadius,
         height,
       }}
       id={id}

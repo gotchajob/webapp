@@ -320,7 +320,6 @@ const TakeInformation = ({
   setNextPageTitle: Dispatch<SetStateAction<string>>;
   setOrderServiceProps: Dispatch<SetStateAction<OrderServiceRequest>>;
 }) => {
-  console.log(initvalue);
   const [name, setName] = useState(initvalue.fullName);
   const [phone, setPhone] = useState(initvalue.phone);
   const [email, setEmail] = useState(initvalue.email);
