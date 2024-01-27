@@ -36,7 +36,7 @@ export const HandleAnswer = ({
   };
 
   const questionTabs = questionList.map((question, index) => {
-    return <AnswerForm index={index} onClick={onClick} question={question} />;
+    return <AnswerForm key={index} index={index} onClick={onClick} question={question} />;
   });
   questionTabs.push(
     <>
