@@ -136,7 +136,7 @@ export const PricePopup = ({ isOpen, setIsOpen, user }: PricePopupProps) => {
                 },
                 px: {
                   xs: 3,
-                  sm: 6,
+                  sm: "48px !important",
                 },
               }}
               position={"relative"}
@@ -349,7 +349,7 @@ const TakeInformation = ({
             }}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={7}>
           <Input
             value={phone}
             placeholder="Số điện thoại"

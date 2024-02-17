@@ -6,7 +6,12 @@ import { ImageCard } from "@/components/common/image-card";
 import { Input } from "@/components/common/input/input";
 import { Text } from "@/components/common/text";
 import { PRIMARYCOLOR } from "@/components/config";
-import { Answer } from "@/package/api/answer";
+import {
+  Answer,
+  SendAnswerRequest,
+  SendAnswerResponse,
+} from "@/package/api/answer";
+import { apiClientFetch } from "@/package/api/api-fetch";
 import { Question } from "@/package/api/question";
 import Box from "@mui/material/Box";
 import Link from "next/link";
@@ -36,8 +41,30 @@ export const HandleAnswer = ({
   };
 
   const questionTabs = questionList.map((question, index) => {
-    return <AnswerForm key={index} index={index} onClick={onClick} question={question} />;
+    return (
+      <AnswerForm
+        key={index}
+        index={index}
+        onClick={onClick}
+        question={question}
+      />
+    );
   });
+
+  const handleSubmit = async () => {
+    try {
+      const params: SendAnswerRequest = {
+        answerList,
+      };
+      const data: SendAnswerResponse = await apiClientFetch(
+        "/api/answer",
+        params
+      );
+      if (data.status === "error") {
+        throw new Error(data.responseText);
+      }
+    } catch (error: any) {}
+  };
   questionTabs.push(
     <>
       <FlexCenter>
@@ -57,7 +84,7 @@ export const HandleAnswer = ({
         </Text>
       </Box>
       <FlexCenter pt={10}>
-        <ContainedButton component={Link} href="/">
+        <ContainedButton onClick={handleSubmit} component={Link} href="/">
           Về trang chủ
         </ContainedButton>
       </FlexCenter>
@@ -84,7 +111,7 @@ export const AnswerForm = ({
       questionId: question.id,
     });
     setDisabled(true);
-    setCurrentAnwser("")
+    setCurrentAnwser("");
   };
   return (
     <StyledCard width={900} margin={"auto"} bgcolor={"#fbfdff"} pb={5}>

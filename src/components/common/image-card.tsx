@@ -21,10 +21,10 @@ export const ImageCard = ({
       style={{
         width,
         objectFit: "cover",
-        objectPosition: "center",
-        borderTopLeftRadius: "inherit",
-        borderTopRightRadius: "inherit",
         borderRadius,
+        objectPosition: "center",
+        borderTopLeftRadius: borderRadius ? "" : "inherit",
+        borderTopRightRadius: borderRadius ? "" : "inherit",
         height,
       }}
       id={id}

@@ -37,7 +37,7 @@ export const apiServerFetch = async (
     cache: "no-cache",
     ...newBody,
   });
-  if (res.status === 500) {
+  if (res.status !== 200) {
     throw new Error("Backend error");
   }
   return await res.json();
