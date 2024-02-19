@@ -5,7 +5,7 @@ import * as yup from "yup";
 import { Input } from "../common/input/input";
 import { ContainedButton } from "../common/button";
 import { FlexBetween } from "../common/flex-box";
-import { AdviceServiceRequest, AdviceServiceResponse } from "@/package/api/home/advice-service";
+import { AdviceServiceRequest, AdviceServiceResponse } from "@/package/api/advice-service";
 import { apiClientFetch } from "@/package/api/api-fetch";
 import { enqueueSnackbar } from "notistack";
 export const ContactForm = () => {
@@ -18,7 +18,7 @@ export const ContactForm = () => {
         fullName: values.name
       }
       const data: AdviceServiceResponse = await apiClientFetch(
-        "/api/home/advice-service",
+        "/api/advice-service",
         params
       );
       if (data.status === "error") {

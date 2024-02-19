@@ -1,4 +1,4 @@
-import { AdviceService } from "@/package/api/home/advice-service";
+import { AdviceService } from "@/package/api/advice-service";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest): Promise<NextResponse> {

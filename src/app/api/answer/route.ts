@@ -1,5 +1,5 @@
 import { SendAnswer } from "@/package/api/answer";
-import { AdviceService } from "@/package/api/home/advice-service";
+import { AdviceService } from "@/package/api/advice-service";
 import { getUserToken } from "@/package/cookies/token";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";

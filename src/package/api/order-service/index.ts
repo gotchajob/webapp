@@ -14,7 +14,7 @@ export const OrderSerivce = async (
   params: OrderServiceRequest
 ): Promise<OrderServiceResponse> => {
   try {
-    const res = await apiServerFetch("/home/order-service", "POST", params);
+    const res = await apiServerFetch("/order-service", "POST", params);
     if (res.status === "error") {
       throw new Error("");
     }

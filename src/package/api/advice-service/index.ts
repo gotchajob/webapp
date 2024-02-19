@@ -1,18 +1,19 @@
 import { apiServerFetch, errorSystem } from "../api-fetch";
 
-export interface SubscribeNewsRequest {
+export interface AdviceServiceRequest {
+  fullName: string;
+  phone: string;
   email: string;
+  advise: string;
 }
-export interface SubscribeNewsResponse {
+export interface AdviceServiceResponse {
   status: string;
   responseText: string;
   data: {};
 }
-export const SubscribeNews = async (
-  params: SubscribeNewsRequest
-): Promise<SubscribeNewsResponse> => {
+export const AdviceService = async(params: AdviceServiceRequest): Promise<AdviceServiceResponse> => {
   try {
-    const res = await apiServerFetch("/home/subscribe-news", "POST", params);
+    const res = await apiServerFetch("/advice-service", "POST", params);
     if (res.status === "error") {
       throw new Error("");
     }

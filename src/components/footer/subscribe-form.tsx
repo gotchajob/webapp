@@ -8,7 +8,7 @@ import { useState } from "react";
 import {
   SubscribeNewsRequest,
   SubscribeNewsResponse,
-} from "@/package/api/home/subscribe-news";
+} from "@/package/api/subscribe-news";
 import { apiClientFetch } from "@/package/api/api-fetch";
 import { enqueueSnackbar } from "notistack";
 
@@ -17,7 +17,7 @@ export const SubscribeForm = () => {
   const handleClick = async () => {
     try {
       const data: SubscribeNewsResponse = await apiClientFetch(
-        "/api/home/subscribe-news",
+        "/api/subscribe-news",
         { email: input }
       );
       if (data.status === "error") {

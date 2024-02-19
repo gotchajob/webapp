@@ -26,7 +26,7 @@ import { UserCurrentResponse } from "@/package/api/user/current";
 import {
   OrderServiceRequest,
   OrderServiceResponse,
-} from "@/package/api/home/order-service";
+} from "@/package/api/order-service";
 import { apiClientFetch } from "@/package/api/api-fetch";
 import { enqueueSnackbar } from "notistack";
 import { ContainedLoadingButton } from "../common/loading-button";
@@ -73,7 +73,7 @@ export const PricePopup = ({ isOpen, setIsOpen, user }: PricePopupProps) => {
     },
     {
       title: "Quét mã QR",
-      component: <QRPayment />,
+      component: <QRPayment email={orderServiceProps.email} />,
     },
   ];
   useEffect(() => {
@@ -85,7 +85,7 @@ export const PricePopup = ({ isOpen, setIsOpen, user }: PricePopupProps) => {
     try {
       setIsLoading(true);
       const data: OrderServiceResponse = await apiClientFetch(
-        "/api/home/order-service",
+        "/api/order-service",
         orderServiceProps
       );
       if (data.status === "error") {
@@ -471,7 +471,7 @@ const ServicePayment = ({
   );
 };
 
-const QRPayment = () => {
+const QRPayment = ({ email }: { email: string }) => {
   return (
     <FlexCenter>
       <Box
@@ -491,6 +491,9 @@ const QRPayment = () => {
       </Text>
       <Text textAlign={"center"} fontSize={14}>
         Ngân hàng Agribank
+      </Text>
+      <Text textAlign={"center"} fontSize={14}>
+        Mục ghi chú: {email}
       </Text>
     </FlexCenter>
   );
