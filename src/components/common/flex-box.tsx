@@ -28,11 +28,12 @@ export const FlexCenter = ({ children, ...props }: BoxProps) => {
   return (
     <Box
       display="flex"
-      justifyContent="space-around"
+      flexDirection={"column"}
+      justifyContent="center"
       alignItems="center"
       {...props}
     >
-      <div>{children}</div>
+      {children}
     </Box>
   );
 };

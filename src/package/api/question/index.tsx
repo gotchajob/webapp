@@ -24,7 +24,6 @@ export const QuestionList = async (
       undefined,
       accessToken
     );
-    console.log(res)
     if (res.status === "error") {
       throw new Error(res.responseText)
     }

@@ -55,7 +55,7 @@ export const Banner = () => {
               người dùng trong quá trình họ tham gia ứng tuyển công việc
             </Text>
           </Box>
-          <FlexCenter>
+          <FlexCenter flexDirection={"row"}>
             <ContainedButton sx={{mr: 3}}>Bắt đầu</ContainedButton>
             <OutlinedIconButton >
               <PlayArrowIcon />

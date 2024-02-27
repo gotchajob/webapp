@@ -46,10 +46,11 @@ export const PricePopup = ({ isOpen, setIsOpen, user }: PricePopupProps) => {
   const [orderServiceProps, setOrderServiceProps] =
     useState<OrderServiceRequest>({
       email: user?.data?.email ? user?.data.email : "",
-      fullName:
-        (user?.data?.firstName ? user?.data.firstName + " " : "") +
-        (user?.data?.lastName ? user?.data.lastName : ""),
+      name: user?.data?.fullName ? user?.data.fullName : "",
       phone: "",
+      paymentId: 1,
+      serviceId: 1,
+      total: 375000,
     });
   const [nextPageTitle, setNextPageTitle] = useState("");
   const tabListCard: Tab[] = [
@@ -320,12 +321,12 @@ const TakeInformation = ({
   setNextPageTitle: Dispatch<SetStateAction<string>>;
   setOrderServiceProps: Dispatch<SetStateAction<OrderServiceRequest>>;
 }) => {
-  const [name, setName] = useState(initvalue.fullName);
+  const [name, setName] = useState(initvalue.name);
   const [phone, setPhone] = useState(initvalue.phone);
   const [email, setEmail] = useState(initvalue.email);
   useEffect(() => {
     if (name.length > 0 && phone.length > 0 && email.length > 0) {
-      setOrderServiceProps({ email, fullName: name, phone });
+      setOrderServiceProps({ ...initvalue, email, name, phone });
       setNextPageTitle("Chú thích");
     } else {
       setNextPageTitle("");
@@ -474,15 +475,16 @@ const ServicePayment = ({
 const QRPayment = ({ email }: { email: string }) => {
   return (
     <FlexCenter>
-      <Box
+      <FlexCenter
         padding={1}
         mb={1}
+        width={"fit-content"}
         paddingBottom={0}
         borderRadius={2}
         border={"2px solid #0E82C4"}
       >
         <ImageCard src="/assets/images/QRPay.png" width={150} />
-      </Box>
+      </FlexCenter>
       <Text textAlign={"center"} fontSize={14}>
         Võ Thị Như Ngọc
       </Text>
@@ -493,7 +495,7 @@ const QRPayment = ({ email }: { email: string }) => {
         Ngân hàng Agribank
       </Text>
       <Text textAlign={"center"} fontSize={14}>
-        Mục ghi chú: {email}
+        Nội dung chuyển khoản: {email}
       </Text>
     </FlexCenter>
   );

@@ -3,6 +3,7 @@ import { FlexCenter } from "@/components/common/flex-box";
 import { Input } from "@/components/common/input/input";
 import { ContainedLoadingButton } from "@/components/common/loading-button";
 import { Text } from "@/components/common/text";
+import { VerifyPassword } from "@/components/verify-password";
 import { apiClientFetch } from "@/package/api/api-fetch";
 import {
   VerifyForgetPasswordRequest,
@@ -10,8 +11,10 @@ import {
 } from "@/package/api/user/verify-forget-password";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
+import { useFormik } from "formik";
 import { enqueueSnackbar } from "notistack";
 import { useState } from "react";
+import * as yup from "yup";
 
 export const ResetPasswordForm = ({
   email,
@@ -23,7 +26,7 @@ export const ResetPasswordForm = ({
   const [isLoading, setIsLoading] = useState(false);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const handleClick = async () => {
+  const handleFormSubmit = async () => {
     try {
       setIsLoading(true);
       if (password !== confirmPassword) {
@@ -52,54 +55,74 @@ export const ResetPasswordForm = ({
       setIsLoading(false);
     }
   };
+
+  const initialValues = {
+    password: "",
+    rePassword: "",
+  };
+
+  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
+    useFormik({
+      initialValues,
+      onSubmit: handleFormSubmit,
+      validationSchema: formSchema,
+    });
+
   return (
-    <>
-      <Box
-        paddingY={4}
-        sx={{ maxWidth: "380px", width: "100%", margin: "auto" }}
-      >
-        <Stack spacing={2.5}>
-          <Text
-            style={{ maxWidth: "380px", width: "100%" }}
-            textAlign={"center"}
-            fontWeight={"300"}
-            fontSize={14}
-          >
-            Thiết lập lại mật khẩu
-          </Text>
-          <Input
-            style={{ maxWidth: "380px" }}
-            placeholder="Mật khẩu"
-            type="password"
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
-          />
-          <Text fontSize={12} fontWeight={300} pl={1}>
-            Mật khẩu bao gồm:
-            <br />
-            Tối thiểu <span style={{ color: "#69b1da" }}>8 kí tự</span>
-            <br />
-            Ít nhất{" "}
-            <span style={{ color: "#69b1da" }}>1 kí tự viết hoa (A-Z)</span>
-            <br />
-            Ít nhất <span style={{ color: "#69b1da" }}>1 chữ số (0-9)</span>
-          </Text>
-          <Input
-            style={{ maxWidth: "380px" }}
-            placeholder="Xác nhận mật khẩu"
-            type="password"
-            onChange={(e) => {
-              setConfirmPassword(e.target.value);
-            }}
-          />
-        </Stack>
+      <Box sx={{ maxWidth: "380px", width: "100%", margin: "auto" }}>
+        <form onSubmit={handleSubmit}>
+          <Stack spacing={2.5} paddingY={4}>
+            <Text
+              style={{ maxWidth: "380px", width: "100%" }}
+              textAlign={"center"}
+              fontWeight={"300"}
+              fontSize={14}
+            >
+              Thiết lập lại mật khẩu
+            </Text>
+            <Input
+              name="password"
+              onBlur={handleBlur}
+              value={values.password}
+              onChange={handleChange}
+              error={!!touched.password && !!errors.password}
+              helperText={(touched.password && errors.password) as string}
+              style={{ width: "100%" }}
+              placeholder="Mật khẩu"
+              type="password"
+            />
+            <VerifyPassword input={values.password} />
+            <Input
+              name="rePassword"
+              onBlur={handleBlur}
+              value={values.rePassword}
+              onChange={handleChange}
+              error={!!touched.rePassword && !!errors.rePassword}
+              helperText={(touched.rePassword && errors.rePassword) as string}
+              style={{ width: "100%" }}
+              placeholder="Xác nhận mật khẩu"
+              type="password"
+            />
+          </Stack>
+        </form>
+        <FlexCenter>
+          <ContainedLoadingButton loading={isLoading} type="submit">
+            Xong
+          </ContainedLoadingButton>
+        </FlexCenter>
       </Box>
-      <FlexCenter>
-        <ContainedLoadingButton loading={isLoading} onClick={handleClick}>
-          Xong
-        </ContainedLoadingButton>
-      </FlexCenter>
-    </>
   );
 };
+
+const formSchema = yup.object().shape({
+  password: yup
+    .string()
+    .required("Password is required")
+    .min(8, "Tối thiểu 8 kí tự")
+    .matches(/^(?=.*[0-9])/, "Ít nhất 1 chữ số (0-9)")
+    .matches(/^(?=.*[A-Z])/, "Ít nhất 1 kí tự viết hoa (A-Z)"),
+  rePassword: yup
+    .string()
+    .oneOf([yup.ref("password")], "Passwords must match")
+    .required("Please re-type password"),
+});

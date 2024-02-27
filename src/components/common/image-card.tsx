@@ -2,10 +2,12 @@ import Image from "next/image";
 export const ImageCard = ({
   src,
   id,
+  objectFit = "cover",
   width = "100%",
   height = "auto",
-  borderRadius
+  borderRadius,
 }: {
+  objectFit?: any;
   height?: string | number;
   src: string;
   borderRadius?: number;
@@ -20,7 +22,7 @@ export const ImageCard = ({
       height={1080}
       style={{
         width,
-        objectFit: "cover",
+        objectFit,
         borderRadius,
         objectPosition: "center",
         borderTopLeftRadius: borderRadius ? "" : "inherit",

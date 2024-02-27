@@ -1,9 +1,10 @@
 import SnackbarProvider from "@/components/snackbar-provider";
 import ThemeRegistry from "@/components/theme-registry/theme-registry";
-import { getConfig } from "@/package/cookies/cookie";
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
-import { headers } from "next/headers";
+import { getAccessTime, setAccessTime } from "@/package/cookies/token";
+import { formatDate } from "@/package/util";
+import { UpdateAccess } from "@/package/api/access";
+import { UpdateAccessServer } from "./_components/update-access";
 
 export const metadata = {
   title: "Gotcha Job",
@@ -11,20 +12,13 @@ export const metadata = {
     "Nền tảng website & app cung cấp các dịch vụ cải thiện kỹ năng người dùng trong quá trình họ tham gia ứng tuyển công việc",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const heads = headers();
-  const pathname = heads.get("next-url");
-  const config = getConfig(cookies());
-  if (config.adminToken !== "" && pathname) {
-    if (!pathname.indexOf("admin")) {
-      redirect("/admin/dashboard");
-    }
-  }
-  // console.log(config);
+  const accessTime = await getAccessTime(cookies());
+  console.log(accessTime)
   return (
     <html lang="en">
       <head>
@@ -39,6 +33,7 @@ export default function RootLayout({
           overflowX: "hidden",
         }}
       >
+        <UpdateAccessServer accessTime={accessTime} />
         <ThemeRegistry>
           <SnackbarProvider>{children}</SnackbarProvider>
         </ThemeRegistry>

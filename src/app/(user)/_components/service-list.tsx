@@ -38,7 +38,7 @@ export const ServiceList = () => {
     {
       icon: <SmartTumIcon />,
       title: "Smart TUM",
-      popupType: "Smart TUM",
+      popupType: "SmartTUM",
       description:
         "Dịch vụ kết nối tự động giữa nhà tuyển dụng và ứng viên dựa vào Mô tả công việc và CV của ứng viên",
     },

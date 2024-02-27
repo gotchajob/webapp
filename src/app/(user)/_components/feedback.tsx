@@ -97,7 +97,7 @@ export const Feedback = () => {
             thi học thuật.
           </Text>
           <FlexCenter>
-            <ImageCard src="/assets/images/paging.png" />
+            <ImageCard src="/assets/images/paging.png" width={50}/>
           </FlexCenter>
         </Stack>
       </FlexCenter>

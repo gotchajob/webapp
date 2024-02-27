@@ -13,7 +13,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { apiClientFetch } from "@/package/api/api-fetch";
 import { ContainedLoadingButton } from "@/components/common/loading-button";
-import { Text } from "@/components/common/text";
+import { VerifyPassword } from "@/components/verify-password";
 
 export const RegisterForm = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -37,7 +37,6 @@ export const RegisterForm = () => {
         throw new Error(data.responseText);
       }
       router.push("/register/verify?email=" + value.email);
-
     } catch (error: any) {
       enqueueSnackbar(error.message, {
         variant: "error",
@@ -109,16 +108,7 @@ export const RegisterForm = () => {
             />
           </Grid>
           <Grid item xs={12}>
-            <Text fontSize={12} fontWeight={300} pl={1}>
-              Mật khẩu bao gồm:
-              <br />
-              Tối thiểu <span style={{ color: "#69b1da" }}>8 kí tự</span>
-              <br />
-              Ít nhất{" "}
-              <span style={{ color: "#69b1da" }}>1 kí tự viết hoa (A-Z)</span>
-              <br />
-              Ít nhất <span style={{ color: "#69b1da" }}>1 chữ số (0-9)</span>
-            </Text>
+            <VerifyPassword input={values.password} />
           </Grid>
           <Grid item xs={12}>
             <Input
@@ -148,7 +138,15 @@ const formSchema = yup.object().shape({
   firstName: yup.string().required("Bắt buộc"),
   lastName: yup.string().required("Bắt buộc"),
   email: yup.string().email("invalid email").required("Email is required"),
-  password: yup.string().required("Password is required"),
+  password: yup
+    .string()
+    .required("Password is required")
+    .min(8, "Tối thiểu 8 kí tự")
+    .matches(/^(?=.*[0-9])/, "Ít nhất 1 chữ số (0-9)")
+    .matches(
+      /^(?=.*[A-Z])/,
+      "Ít nhất 1 kí tự viết hoa (A-Z)"
+    ),
   rePassword: yup
     .string()
     .oneOf([yup.ref("password")], "Passwords must match")

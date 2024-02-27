@@ -22,3 +22,14 @@ export const getAdminToken = async (cookies: ReadonlyRequestCookies) => {
   const config = getConfig(cookies)
   return config.adminToken
 }
+
+export const setAccessTime = async (accessTime: string, cookies: ReadonlyRequestCookies) => {
+  const config = getConfig(cookies)
+  config.accessTime = accessTime
+  setConfig(config, cookies)
+}
+
+export const getAccessTime = async (cookies: ReadonlyRequestCookies) => {
+  const config = getConfig(cookies)
+  return config.accessTime
+}

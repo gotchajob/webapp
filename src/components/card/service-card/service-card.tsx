@@ -16,7 +16,7 @@ export interface ServiceCardParams {
   title: string;
   description: string;
   icon: ReactNode;
-  popupType: "MockInterview" | "PartnerTraining" | "CV" | "Smart TUM";
+  popupType: "MockInterview" | "PartnerTraining" | "CV" | "SmartTUM";
 }
 
 export const ServiceCard = ({ params }: { params: ServiceCardParams }) => {
@@ -33,7 +33,7 @@ export const ServiceCard = ({ params }: { params: ServiceCardParams }) => {
         );
       case "CV":
         return <CVServicePopup isOpen={isOpen} setIsOpen={setIsOpen} />;
-      case "Smart TUM":
+      case "SmartTUM":
         return <SmartTUMServicePopup isOpen={isOpen} setIsOpen={setIsOpen} />;
     }
   };
@@ -56,7 +56,7 @@ export const ServiceCard = ({ params }: { params: ServiceCardParams }) => {
         }}
       >
         <FlexCenter>
-          <Box width={"48px"}>{params.icon}</Box>
+          <Box display={"flex"} justifyContent={"center"} width={"48px"} height={"48px"}>{params.icon}</Box>
         </FlexCenter>
         <Text
           className="service-card-title"

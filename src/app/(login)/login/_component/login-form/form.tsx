@@ -29,13 +29,14 @@ export const Form = () => {
         password,
       });
       if (data.status === "error") {
+        console.log(data.responseText)
         throw new Error(data.responseText);
       }
       if (window) {
         window.location.href = "/";
       }
     } catch (error: any) {
-      if (error.message === "User is disabled") {
+      if (error.message === "User is not verify") {
         router.push("/register/verify?email=" + email);
         enqueueSnackbar("Bạn phải xác thực email trước khi đăng nhập", {
           variant: "error",

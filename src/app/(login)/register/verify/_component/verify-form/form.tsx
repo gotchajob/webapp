@@ -75,7 +75,7 @@ export const Form = ({
           >
             Nhập mã 4 số được gửi tới email của bạn để xác thực.
           </Text>
-          <FlexCenter>
+          <FlexCenter flexDirection={"row"}>
             {inputRefs.map((inputRef, index) => (
               <InputIcon
                 key={index}

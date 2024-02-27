@@ -6,8 +6,8 @@ export interface UserCurrentResponse {
   responseText: string;
   data: {
     id: string;
-    firstName: string;
-    lastName: string;
+    fullName: string;
+
     email: string;
     roleId: number;
     status: number;
