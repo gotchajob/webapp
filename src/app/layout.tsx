@@ -18,7 +18,6 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const accessTime = await getAccessTime(cookies());
-  console.log(accessTime)
   return (
     <html lang="en">
       <head>

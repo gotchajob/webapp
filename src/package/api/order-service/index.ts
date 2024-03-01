@@ -1,6 +1,6 @@
 import { apiServerFetch, errorSystem } from "../api-fetch";
 
-export interface OrderServiceRequest {
+export interface CreateOrderServiceRequest {
   serviceId: number;
   name: string;
   phone: string;
@@ -8,14 +8,26 @@ export interface OrderServiceRequest {
   paymentId: number;
   total: number;
 }
-export interface OrderServiceResponse {
+export interface CreateOrderServiceResponse {
   status: string;
   responseText: string;
-  data: {};
+  data: {
+    id: string;
+    email: string;
+    name: string;
+    phone: string;
+    service: string;
+    payment: string;
+    status: number;
+    created: string;
+    total: number;
+    processingBy: string;
+    code: string;
+  };
 }
-export const OrderSerivce = async (
-  params: OrderServiceRequest
-): Promise<OrderServiceResponse> => {
+export const CreateOrderSerivce = async (
+  params: CreateOrderServiceRequest
+): Promise<CreateOrderServiceResponse> => {
   try {
     // console.log(params)
     const res = await apiServerFetch("/order-service", "POST", params);

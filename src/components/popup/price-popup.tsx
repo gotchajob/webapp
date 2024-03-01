@@ -24,8 +24,8 @@ import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import { UserCurrentResponse } from "@/package/api/user/current";
 import {
-  OrderServiceRequest,
-  OrderServiceResponse,
+  CreateOrderServiceRequest,
+  CreateOrderServiceResponse,
 } from "@/package/api/order-service";
 import { apiClientFetch } from "@/package/api/api-fetch";
 import { enqueueSnackbar } from "notistack";
@@ -43,8 +43,10 @@ export interface PricePopupProps {
 }
 export const PricePopup = ({ isOpen, setIsOpen, user }: PricePopupProps) => {
   const [tabList, setTabList] = useState<Tab[]>([]);
+  const [openSuccess, setOpenSuccess] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [orderServiceProps, setOrderServiceProps] =
-    useState<OrderServiceRequest>({
+    useState<CreateOrderServiceRequest>({
       email: user?.data?.email ? user?.data.email : "",
       name: user?.data?.fullName ? user?.data.fullName : "",
       phone: "",
@@ -74,34 +76,19 @@ export const PricePopup = ({ isOpen, setIsOpen, user }: PricePopupProps) => {
     },
     {
       title: "Quét mã QR",
-      component: <QRPayment email={orderServiceProps.email} />,
+      component: (
+        <QRPayment
+          orderServiceProps={orderServiceProps}
+          setIsLoading={setIsLoading}
+          setIsOpen={setIsOpen}
+        />
+      ),
     },
   ];
   useEffect(() => {
     setTabList([tabListCard[0]]);
   }, [isOpen]);
-  const [openSuccess, setOpenSuccess] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const confirmOrderService = async () => {
-    try {
-      setIsLoading(true);
-      const data: OrderServiceResponse = await apiClientFetch(
-        "/api/order-service",
-        orderServiceProps
-      );
-      if (data.status === "error") {
-        throw new Error(data.responseText);
-      }
-      setOpenSuccess(true);
-      setIsOpen(false);
-    } catch (error: any) {
-      enqueueSnackbar(error.message, {
-        variant: "error",
-      });
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  // setOpenSuccess(true);
   return (
     <>
       <Dialog
@@ -178,7 +165,7 @@ export const PricePopup = ({ isOpen, setIsOpen, user }: PricePopupProps) => {
               </Stack>
               <Box
                 sx={{
-                  height: 250,
+                  height: 300,
                   pl: 1,
                   overflowY: "scroll",
                 }}
@@ -222,7 +209,8 @@ export const PricePopup = ({ isOpen, setIsOpen, user }: PricePopupProps) => {
                   <ContainedLoadingButton
                     loading={isLoading}
                     onClick={() => {
-                      confirmOrderService();
+                      setIsOpen(false);
+                      setOpenSuccess(true);
                     }}
                   >
                     Kiểm tra thanh toán
@@ -317,9 +305,9 @@ const TakeInformation = ({
   setOrderServiceProps,
   initvalue,
 }: {
-  initvalue: OrderServiceRequest;
+  initvalue: CreateOrderServiceRequest;
   setNextPageTitle: Dispatch<SetStateAction<string>>;
-  setOrderServiceProps: Dispatch<SetStateAction<OrderServiceRequest>>;
+  setOrderServiceProps: Dispatch<SetStateAction<CreateOrderServiceRequest>>;
 }) => {
   const [name, setName] = useState(initvalue.name);
   const [phone, setPhone] = useState(initvalue.phone);
@@ -472,31 +460,68 @@ const ServicePayment = ({
   );
 };
 
-const QRPayment = ({ email }: { email: string }) => {
+const QRPayment = ({
+  setIsLoading,
+  setIsOpen,
+  orderServiceProps,
+}: {
+  setIsLoading: (data: boolean) => void;
+  setIsOpen: (data: boolean) => void;
+  orderServiceProps: CreateOrderServiceRequest;
+}) => {
+  const [code, setCode] = useState<string | null>(null);
+  const confirmOrderService = async () => {
+    try {
+      setIsLoading(true);
+      const data: CreateOrderServiceResponse = await apiClientFetch(
+        "/api/order-service",
+        orderServiceProps
+      );
+      if (data.status === "error") {
+        throw new Error(data.responseText);
+      }
+      console.log(data)
+      setCode(data.data.code);
+      setIsLoading(false);
+    } catch (error: any) {
+      enqueueSnackbar(error.message, {
+        variant: "error",
+      });
+    } finally {
+    }
+  };
+  useEffect(() => {
+    confirmOrderService();
+  }, []);
   return (
     <FlexCenter>
-      <FlexCenter
-        padding={1}
-        mb={1}
-        width={"fit-content"}
-        paddingBottom={0}
-        borderRadius={2}
-        border={"2px solid #0E82C4"}
-      >
-        <ImageCard src="/assets/images/QRPay.png" width={150} />
-      </FlexCenter>
-      <Text textAlign={"center"} fontSize={14}>
-        Võ Thị Như Ngọc
-      </Text>
-      <Text textAlign={"center"} fontSize={14}>
-        5904205128102
-      </Text>
-      <Text textAlign={"center"} fontSize={14}>
-        Ngân hàng Agribank
-      </Text>
-      <Text textAlign={"center"} fontSize={14}>
-        Nội dung chuyển khoản: {email}
-      </Text>
+      {code ? (
+        <>
+          <FlexCenter
+            padding={1}
+            mb={1}
+            width={"fit-content"}
+            borderRadius={2}
+            border={"2px solid #0E82C4"}
+          >
+            <ImageCard src="/assets/images/QRPay.png" width={150} />
+          </FlexCenter>
+          <Text textAlign={"center"} fontSize={14}>
+            Võ Thị Như Ngọc
+          </Text>
+          <Text textAlign={"center"} fontSize={14}>
+            5904205128102
+          </Text>
+          <Text textAlign={"center"} fontSize={14}>
+            Ngân hàng Agribank
+          </Text>
+          <Text textAlign={"center"} fontSize={14}>
+            Nội dung chuyển khoản: {code}
+          </Text>
+        </>
+      ) : (
+        <></>
+      )}
     </FlexCenter>
   );
 };
