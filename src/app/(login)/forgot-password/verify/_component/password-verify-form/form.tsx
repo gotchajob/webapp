@@ -5,7 +5,10 @@ import { InputIcon } from "@/components/common/input/input";
 import { ContainedLoadingButton } from "@/components/common/loading-button";
 import { Text } from "@/components/common/text";
 import { apiClientFetch } from "@/package/api/api-fetch";
-import { UserCreateForgotPasswordRequest, UserCreateForgotPasswordResponse } from "@/package/api/user/create-forgot-password";
+import {
+  UserCreateForgotPasswordRequest,
+  UserCreateForgotPasswordResponse,
+} from "@/package/api/user/create-forgot-password";
 import { CreateVerifyResponse } from "@/package/api/user/create-verify-email";
 import {
   UserVerifyRequest,
@@ -49,7 +52,12 @@ export const PasswordVerifyForm = ({
       if (data.status === "error") {
         throw new Error(data.responseText);
       }
-      router.push("/forgot-password/reset-password?email=" + email + "&code=" + input.join(""));
+      router.push(
+        "/forgot-password/reset-password?email=" +
+          email +
+          "&code=" +
+          input.join("")
+      );
     } catch (error: any) {
       enqueueSnackbar(error.message, {
         variant: "error",
@@ -70,7 +78,7 @@ export const PasswordVerifyForm = ({
           >
             Nhập mã 4 số được gửi tới email của bạn để xác thực.
           </Text>
-          <FlexCenter>
+          <FlexCenter flexDirection={"row"}>
             {inputRefs.map((inputRef, index) => (
               <InputIcon
                 key={index}

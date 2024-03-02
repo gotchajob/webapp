@@ -29,7 +29,6 @@ export const Form = () => {
         password,
       });
       if (data.status === "error") {
-        console.log(data.responseText)
         throw new Error(data.responseText);
       }
       if (window) {

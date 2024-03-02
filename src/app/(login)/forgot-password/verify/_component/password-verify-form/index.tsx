@@ -10,5 +10,6 @@ export const VerifyForm = async ({
   };
 }) => {
   const res = await UserCreateForgotPassword(searchParams);
+  console.log(res)
   return <PasswordVerifyForm res={res} email={searchParams.email} />;
 };

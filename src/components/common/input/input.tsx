@@ -4,6 +4,7 @@ import { PRIMARYCOLOR } from "../../config";
 import { TextFieldProps } from "@mui/material/TextField";
 import { Text } from "../text";
 import { ChangeEvent, use, useState } from "react";
+import { InputProps } from "@mui/material";
 
 export const Input = ({
   helperText,
@@ -34,7 +35,10 @@ export const Input = ({
     </>
   );
 };
-export const InputIcon = ({ onChange, ...props }: any) => {
+interface InputIconProps extends InputProps {
+  onChange: any;
+}
+export const InputIcon = ({ onChange, ...props }: InputIconProps) => {
   const [input, setInput] = useState("");
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     try {
