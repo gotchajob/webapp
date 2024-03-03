@@ -34,7 +34,7 @@ export const apiServerFetch = async (
   const res = await fetch(process.env.PRIVATE_BACKEND_ENDPOINT + url, {
     method,
     headers,
-    cache: "no-cache",
+    cache: "no-store",
     ...newBody,
   });
   if (!(res.status === 200 || res.status === 400)) {

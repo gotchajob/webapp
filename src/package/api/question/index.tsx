@@ -7,7 +7,6 @@ export interface Question {
 export interface QuestionRequest {
   questionId: string;
 }
-
 export interface QuestionResponse {
   status: string;
   responseText: string;

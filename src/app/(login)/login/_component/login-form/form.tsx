@@ -1,5 +1,5 @@
 "use client";
-import { ContainedButton, OutlinedButton } from "@/components/common/button";
+import {  OutlinedButton } from "@/components/common/button";
 import { FlexBetween, FlexCenter } from "@/components/common/flex-box";
 import { ImageCard } from "@/components/common/image-card";
 import { Input } from "@/components/common/input/input";
