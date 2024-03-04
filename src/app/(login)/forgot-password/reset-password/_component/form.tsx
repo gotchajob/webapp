@@ -24,18 +24,13 @@ export const ResetPasswordForm = ({
   code: string;
 }) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const handleFormSubmit = async () => {
+  const handleFormSubmit = async (value: any) => {
     try {
       setIsLoading(true);
-      if (password !== confirmPassword) {
-        throw new Error("Mật khẩu không khớp");
-      }
       const params: VerifyForgetPasswordRequest = {
         code,
         email,
-        password,
+        password: value.password,
       };
       const data: VerifyForgetPasswordResponse = await apiClientFetch(
         "/api/user/verify-forget-password",
@@ -69,48 +64,48 @@ export const ResetPasswordForm = ({
     });
 
   return (
-      <Box sx={{ maxWidth: "380px", width: "100%", margin: "auto" }}>
-        <form onSubmit={handleSubmit}>
-          <Stack spacing={2.5} paddingY={4}>
-            <Text
-              style={{ maxWidth: "380px", width: "100%" }}
-              textAlign={"center"}
-              fontWeight={"300"}
-              fontSize={14}
-            >
-              Thiết lập lại mật khẩu
-            </Text>
-            <Input
-              name="password"
-              onBlur={handleBlur}
-              value={values.password}
-              onChange={handleChange}
-              error={!!touched.password && !!errors.password}
-              helperText={(touched.password && errors.password) as string}
-              style={{ width: "100%" }}
-              placeholder="Mật khẩu"
-              type="password"
-            />
-            <VerifyPassword input={values.password} />
-            <Input
-              name="rePassword"
-              onBlur={handleBlur}
-              value={values.rePassword}
-              onChange={handleChange}
-              error={!!touched.rePassword && !!errors.rePassword}
-              helperText={(touched.rePassword && errors.rePassword) as string}
-              style={{ width: "100%" }}
-              placeholder="Xác nhận mật khẩu"
-              type="password"
-            />
-          </Stack>
-        </form>
+    <Box sx={{ maxWidth: "380px", width: "100%", margin: "auto" }}>
+      <form onSubmit={handleSubmit}>
+        <Stack spacing={2.5} paddingY={4}>
+          <Text
+            style={{ maxWidth: "380px", width: "100%" }}
+            textAlign={"center"}
+            fontWeight={"300"}
+            fontSize={14}
+          >
+            Thiết lập lại mật khẩu
+          </Text>
+          <Input
+            name="password"
+            onBlur={handleBlur}
+            value={values.password}
+            onChange={handleChange}
+            error={!!touched.password && !!errors.password}
+            helperText={(touched.password && errors.password) as string}
+            style={{ width: "100%" }}
+            placeholder="Mật khẩu"
+            type="password"
+          />
+          <VerifyPassword input={values.password} />
+          <Input
+            name="rePassword"
+            onBlur={handleBlur}
+            value={values.rePassword}
+            onChange={handleChange}
+            error={!!touched.rePassword && !!errors.rePassword}
+            helperText={(touched.rePassword && errors.rePassword) as string}
+            style={{ width: "100%" }}
+            placeholder="Xác nhận mật khẩu"
+            type="password"
+          />
+        </Stack>
         <FlexCenter>
           <ContainedLoadingButton loading={isLoading} type="submit">
             Xong
           </ContainedLoadingButton>
         </FlexCenter>
-      </Box>
+      </form>
+    </Box>
   );
 };
 

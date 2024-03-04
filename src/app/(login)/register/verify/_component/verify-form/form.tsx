@@ -27,9 +27,7 @@ export const Form = ({
   const router = useRouter();
   if (res.status === "error" && res.responseText === "Verified account") {
     router.push("/login");
-    // enqueueSnackbar(res.responseText, {
-    //   variant: "error",
-    // });
+
   }
   const inputRefs = [1, 2, 3, 4];
 
@@ -52,6 +50,7 @@ export const Form = ({
         value
       );
       if (data.status === "error") {
+        console.log(data)
         throw new Error(data.responseText);
       }
       router.push("/register/success?name=" + data.data.fullName);

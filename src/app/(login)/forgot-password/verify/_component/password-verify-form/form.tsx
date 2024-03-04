@@ -49,6 +49,7 @@ export const PasswordVerifyForm = ({
         "/api/user/check-code-forget-password",
         value
       );
+      console.log(data)
       if (data.status === "error") {
         throw new Error(data.responseText);
       }
