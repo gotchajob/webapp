@@ -29,7 +29,7 @@ export const CreateOrderSerivce = async (
   params: CreateOrderServiceRequest
 ): Promise<CreateOrderServiceResponse> => {
   try {
-    // console.log(params)
+    console.log(params)
     const res = await apiServerFetch("/order-service", "POST", params);
     if (res.status === "error") {
       throw new Error("");
