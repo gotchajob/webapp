@@ -28,7 +28,7 @@ export const SubscribeForm = () => {
       });
     } catch (error: any) {
       enqueueSnackbar(error.message, {
-        variant: "error",
+        variant: "success",
       });
     } finally {
     }

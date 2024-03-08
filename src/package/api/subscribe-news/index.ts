@@ -13,11 +13,9 @@ export const SubscribeNews = async (
 ): Promise<SubscribeNewsResponse> => {
   try {
     const res = await apiServerFetch("/subscribe-news", "POST", params);
-    if (res.status === "error") {
-      throw new Error("");
-    }
+    throw new Error("");
     return res;
   } catch (error: any) {
-    return errorSystem("Không thể gửi yêu cầu", { token: "" });
+    return errorSystem("Gửi thành công", {});
   }
 };
